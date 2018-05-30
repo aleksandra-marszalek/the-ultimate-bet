@@ -12,4 +12,10 @@ public class HelloController {
     public String hello () {
         return "Hello world";
     }
+
+    @GetMapping("/helloUser")
+    @ResponseBody
+    public String helloUser () {
+        return "Hello authenticated user";
+    }
 }
