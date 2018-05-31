@@ -51,6 +51,10 @@ public class userAccountController {
             List<Operation> lastOps = operationService.findAllByWalletLast(wallet);
             model.addAttribute("operations", lastOps);
             model.addAttribute("id", id);
+            BigDecimal bg = new BigDecimal("5");
+            if (wallet.getBalance().compareTo(bg)==-1) {
+                model.addAttribute("info", "Wow, you're account lacks money! Don't hesitate and recharge it now!");
+            }
             return "UserWallet";
         } else {
             return "redirect:/";

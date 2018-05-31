@@ -28,7 +28,9 @@ public class OperationServiceImpl implements OperationService {
     @Override
     public List<Operation> findAllByWalletLast(Wallet wallet) {
         List<Operation> last10 = operationRepository.findAllByWalletOrderByCreatedDesc(wallet);
-        last10 = last10.subList(0,3);
+        if (last10.size()>=10) {
+            last10 = last10.subList(0,10);
+        }
         return last10;
     }
 
