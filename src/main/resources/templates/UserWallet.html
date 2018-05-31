@@ -75,7 +75,7 @@
         <th>amount</th>
         <th>created</th>
     </tr>
-    <tr th:each="operation: ${wallet.operations}">
+    <tr th:each="operation: ${operations}">
         <td><p th:text="${operation.id}"></p></td>
         <td><p th:text="${operation.title}"></p></td>
         <td><p th:text="${operation.amount}"></p></td>

@@ -17,6 +17,7 @@ import pl.coderslab.theultimatebet.service.WalletService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -47,6 +48,8 @@ public class userAccountController {
         if (customUser.getUser().getId() == id) {
             Wallet wallet = walletService.findWalletByUser(customUser.getUser());
             model.addAttribute("wallet", wallet);
+            List<Operation> lastOps = operationService.findAllByWalletLast(wallet);
+            model.addAttribute("operations", lastOps);
             model.addAttribute("id", id);
             return "UserWallet";
         } else {
