@@ -67,6 +67,21 @@
         <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=100)}">Add 100 PLN</a></td>
     </tr>
 </table>
+<h2>Last operations</h2>
+<table class="minimalistBlack">
+    <tr>
+        <th>operation id</th>
+        <th>title</th>
+        <th>amount</th>
+        <th>created</th>
+    </tr>
+    <tr th:each="operation: ${wallet.operations}">
+        <td><p th:text="${operation.id}"></p></td>
+        <td><p th:text="${operation.title}"></p></td>
+        <td><p th:text="${operation.amount}"></p></td>
+        <td><p th:text="${operation.created}"></p></td>
+    </tr>
+</table>
 
 
 </body>
