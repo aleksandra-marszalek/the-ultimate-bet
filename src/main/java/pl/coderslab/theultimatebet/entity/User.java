@@ -5,6 +5,7 @@ import pl.coderslab.theultimatebet.validationGroups.ValidationUser;
 import pl.coderslab.theultimatebet.validator.UniqueName;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,23 +27,23 @@ public class User {
     @NotEmpty(groups = {ValidationUser.class, Default.class})
     private String username;
 
-//    @NotNull(message = "cannot be empty")
-//    private String firstname;
-//
-//    @NotNull(message = "cannot be empty")
-//    private String lastname;
-//
-//    @DateTimeFormat(pattern = "ddMMyyyy")
-//    private LocalDate birthdate;
-//
-//    @NotNull(message = "cannot be empty")
-//    @Column(unique = true)
-//    private String email;
+    @NotEmpty(groups = ValidationUser.class, message = "cannot be empty")
+    private String firstname;
+
+    @NotEmpty(groups = ValidationUser.class, message = "cannot be empty")
+    private String lastname;
+
+
+    private boolean adult;
+
+    @Email
+    @NotEmpty(groups = ValidationUser.class, message = "cannot be empty")
+    @Column(unique = true)
+    private String email;
 
     @NotEmpty(groups = ValidationUser.class)
     private String password;
 
-    private int enabled;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER) @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -76,14 +77,6 @@ public class User {
         this.password = password;
     }
 
-    public int getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(int enabled) {
-        this.enabled = enabled;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -92,35 +85,35 @@ public class User {
         this.roles = roles;
     }
 
-//    public String getFirstname() {
-//        return firstname;
-//    }
-//
-//    public void setFirstname(String firstname) {
-//        this.firstname = firstname;
-//    }
-//
-//    public String getLastname() {
-//        return lastname;
-//    }
-//
-//    public void setLastname(String lastname) {
-//        this.lastname = lastname;
-//    }
-//
-//    public LocalDate getBirthdate() {
-//        return birthdate;
-//    }
-//
-//    public void setBirthdate(LocalDate birthdate) {
-//        this.birthdate = birthdate;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public boolean isAdult() {
+        return adult;
+    }
+
+    public void setAdult(boolean adult) {
+        this.adult = adult;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

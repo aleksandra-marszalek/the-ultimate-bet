@@ -38,6 +38,14 @@ public class userController {
             model.addAttribute("info", "This username already exists");
             return "registration";
             }
+        if (userService.checkEmail(user)){
+            model.addAttribute("info2", "This email already exists");
+            return "registration";
+        }
+        if (!user.isAdult()) {
+            model.addAttribute("info3", "You must be at least 18 to sign up.");
+            return "registration";
+        }
             userService.saveUser(user);
             return "redirect:/";
     }

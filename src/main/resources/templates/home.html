@@ -20,10 +20,6 @@
 
         <p>Witaj, <span sec:authentication="name"></span></p>
 
-        <p sec:authorize="hasRole('ROLE_ADMIN')"> MAM ROLE ADMIN</p>
-    <p sec:authorize="hasRole('ROLE_USER')"> MAM ROLE USER</p>
-    <p sec:authorize="hasRole('ROLE_MODERATOR')"> MAM ROLE MODERATOR</p>
-
         <form th:action="@{/logout}" method="POST">
 
             <input type="submit" value="Wyloguj"/>
@@ -38,7 +34,9 @@
 
 <span sec:authorize="!isAuthenticated()">
 
-         Log in: <a th:href="@{/login}">zalogować</a>.
+    <a th:href="@{/login}">You need to log in</a>.
+
+    <hr>
 
     <a th:href="@{/newUser}">Add new user</a>
     <a th:href="@{/addUser}">Add new admin</a>

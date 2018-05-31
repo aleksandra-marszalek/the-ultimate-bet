@@ -34,7 +34,6 @@ public class HelloController {
         User user = new User();
         user.setUsername("user");
         user.setPassword("user123");
-        user.setEnabled(1);
         userService.saveUser(user);
         return "added User";
     }
@@ -45,7 +44,6 @@ public class HelloController {
         User user = new User();
         user.setUsername("admin");
         user.setPassword("admin123");
-        user.setEnabled(1);
         userService.saveUser(user);
         return "added admin";
     }

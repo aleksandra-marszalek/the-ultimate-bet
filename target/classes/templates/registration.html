@@ -8,6 +8,8 @@
 
 
     <p th:text="${info}"></p>
+    <p th:text="${info2}"></p>
+    <p th:text="${info3}"></p>
 
     <p> Username: <input type="text" th:field="*{username}" /></p>
 
@@ -19,7 +21,27 @@
 
     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Password not valid</p>
 
+    <p> Firstname: <input type="text" th:field="*{firstname}" /></p>
 
+    <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"> Cannot be empty</p>
+
+
+    <p> Lastname: <input type="text" th:field="*{lastname}" /></p>
+
+    <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"> Cannot be empty</p>
+
+
+    <p> Email: <input type="text" th:field="*{email}" /></p>
+
+    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Email not valid</p>
+
+
+    <div>
+        <label>Are you 18 years old or more?</label>
+    <div>
+        <input type="checkbox" th:field="*{adult}" value="true"  th:checked="${false}"/>
+    </div>
+    </div>
 
 
     <input type="hidden" th:field="*{id}" />

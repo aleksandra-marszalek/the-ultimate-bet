@@ -29,21 +29,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
+    @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
         Role userRole = roleRepository.findByName("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
+    }
+
+    public void save (User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public boolean checkEmail(User user) {
+        String email = user.getEmail();
+        User userEx = findByEmail(email);
+        return userEx != null;
     }
 
     @Override
     public boolean checkUsername (User user) {
         String username = user.getUsername();
         User userEx = findByUserName(username);
-        if (userEx == null) {
-            return false;
-        }
-        return true;
+        return userEx != null;
     }
+
+
+
 }
