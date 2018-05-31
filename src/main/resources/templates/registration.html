@@ -7,6 +7,7 @@
 <form th:action="@{/newUser}" th:object="${user}" method="post">
 
 
+    <p th:text="${info}"></p>
 
     <p> Username: <input type="text" th:field="*{username}" /></p>
 

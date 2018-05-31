@@ -36,4 +36,14 @@ public class UserServiceImpl implements UserService {
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
+
+    @Override
+    public boolean checkUsername (User user) {
+        String username = user.getUsername();
+        User userEx = findByUserName(username);
+        if (userEx == null) {
+            return false;
+        }
+        return true;
+    }
 }

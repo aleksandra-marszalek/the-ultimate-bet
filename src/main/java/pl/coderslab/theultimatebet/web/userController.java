@@ -30,9 +30,13 @@ public class userController {
     }
 
     @PostMapping("/newUser")
-    public String newUser(@Validated({ValidationUser.class}) @ModelAttribute User user, BindingResult result) {
+    public String newUser(@Validated({ValidationUser.class}) @ModelAttribute User user, BindingResult result, Model model) {
             if (result.hasErrors()) {
                 return "registration";
+            }
+            if (userService.checkUsername(user)){
+            model.addAttribute("info", "This username already exists");
+            return "registration";
             }
             userService.saveUser(user);
             return "redirect:/";

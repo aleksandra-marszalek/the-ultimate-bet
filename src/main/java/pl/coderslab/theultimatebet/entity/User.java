@@ -2,8 +2,10 @@ package pl.coderslab.theultimatebet.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.theultimatebet.validationGroups.ValidationUser;
+import pl.coderslab.theultimatebet.validator.UniqueName;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
@@ -21,7 +23,7 @@ public class User {
 
 
     @Column(nullable = false, unique = true)
-    @NotNull(groups = {ValidationUser.class, Default.class})
+    @NotEmpty(groups = {ValidationUser.class, Default.class})
     private String username;
 
 //    @NotNull(message = "cannot be empty")
@@ -37,7 +39,7 @@ public class User {
 //    @Column(unique = true)
 //    private String email;
 
-    @NotNull(groups = ValidationUser.class)
+    @NotEmpty(groups = ValidationUser.class)
     private String password;
 
     private int enabled;
