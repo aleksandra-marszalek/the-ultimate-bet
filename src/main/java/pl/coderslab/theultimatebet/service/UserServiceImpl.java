@@ -4,9 +4,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.theultimatebet.entity.Role;
 import pl.coderslab.theultimatebet.entity.User;
+import pl.coderslab.theultimatebet.entity.Wallet;
 import pl.coderslab.theultimatebet.repository.RoleRepository;
 import pl.coderslab.theultimatebet.repository.UserRepository;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -38,6 +40,10 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByName("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        Wallet wallet = new Wallet();
+        wallet.setBalance(BigDecimal.ZERO);
+        wallet.setUser(user);
+        user.setWallet(wallet);
         userRepository.save(user);
     }
 

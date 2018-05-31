@@ -14,6 +14,7 @@ public class Wallet {
 
     @Nullable
     private BigDecimal balance;
+    
 
     @OneToOne
     User user;
