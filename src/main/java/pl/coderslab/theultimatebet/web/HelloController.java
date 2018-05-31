@@ -1,10 +1,13 @@
 package pl.coderslab.theultimatebet.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.theultimatebet.CurrentUser;
 import pl.coderslab.theultimatebet.entity.User;
 import pl.coderslab.theultimatebet.service.UserService;
 
@@ -15,7 +18,13 @@ public class HelloController {
     UserService userService;
 
     @GetMapping("/")
-    public String home () {
+    public String home (@AuthenticationPrincipal CurrentUser customUser, Model model) {
+        try {
+            Long id = customUser.getUser().getId();
+            model.addAttribute("id", id);
+        } catch (Exception e) {
+            return "home";
+        }
         return "home";
     }
 

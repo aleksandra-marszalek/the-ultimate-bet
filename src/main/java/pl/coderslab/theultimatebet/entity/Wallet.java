@@ -1,5 +1,7 @@
 package pl.coderslab.theultimatebet.entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -10,6 +12,7 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Nullable
     private BigDecimal balance;
 
     @OneToOne

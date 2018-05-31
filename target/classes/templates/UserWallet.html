@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"> <head>
-    <title>User Account</title>
+    <title>User Wallet</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         table.minimalistBlack {
@@ -39,17 +39,26 @@
             font-size: 14px;
         }
     </style>
-    <title>Title</title>
 </head>
 <body>
-<h2>Menu</h2>
+<h1>User Wallet</h1>
+<hr>
+
 <table class="minimalistBlack">
     <tr>
         <td><a href="/">Home</a></td>
-        <td><a th:href="@{/user/{id}/wallet(id=${id})}">Go to my wallet</a></td>
-        <th><a th:href="@{/user/{id}/bets(id=${id})}">Go to my bets</a></th>
+        <td><a th:href="@{/user/{id}(id=${id})}">Go to my panel</a></td>
     </tr>
 </table>
+
+<hr>
+<h2>Actual balance</h2>
+<table class="minimalistBlack">
+    <tr>
+        <td><p th:text="${wallet.balance}"></p></td>
+    </tr>
+</table>
+
 
 </body>
 </html>
