@@ -14,11 +14,13 @@ public class HelloController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/hello")
-    @ResponseBody
-    public String hello () {
-        return "Hello world";
+    @GetMapping("/")
+    public String home () {
+        return "home";
     }
+
+    @PostMapping("/logout")
+    public String homeLogout () {return "home";}
 
     @GetMapping("/helloUser")
     @ResponseBody
@@ -35,5 +37,16 @@ public class HelloController {
         user.setEnabled(1);
         userService.saveUser(user);
         return "added User";
+    }
+
+    @ResponseBody
+    @GetMapping("/addAdmin")
+    public String addAdmin() {
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("admin123");
+        user.setEnabled(1);
+        userService.saveUser(user);
+        return "added admin";
     }
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+
+    <title>Login View</title>
+
+</head>
+
+<body>
+
+<h1>Home</h1>
+
+
+
+<span sec:authorize="isAuthenticated()">
+
+        <p>Witaj, <span sec:authentication="name"></span></p>
+
+        <p sec:authorize="hasRole('ROLE_ADMIN')"> MAM ROLE ADMIN</p>
+    <p sec:authorize="hasRole('ROLE_USER')"> MAM ROLE USER</p>
+    <p sec:authorize="hasRole('ROLE_MODERATOR')"> MAM ROLE MODERATOR</p>
+
+        <form th:action="@{/logout}" method="POST">
+
+            <input type="submit" value="Wyloguj"/>
+
+
+
+        </form>
+
+    </span>
+
+
+
+<span sec:authorize="!isAuthenticated()">
+
+         Log in: <a th:href="@{/login}">zalogować</a>.
+
+    <a th:href="@{/addUser}">Add new user</a>
+    <a th:href="@{/addUser}">Add new admin</a>
+
+    </span>
+
+
+
+
+
+</body>
+
+</html>
