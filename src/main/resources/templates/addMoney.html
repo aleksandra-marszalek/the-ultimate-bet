@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> <head>
+    <title>Add money</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> </head>
+
+
+<h1>Add money</h1>
+<p>Here the user should be redirected to his account / creditcard details...</p>
+<p th:text=" |Are you sure you want to add ${amount} PLN to your account'?' |"></p>
+<form method="post" th:action="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=${amount})}">
+    yes: <input type="radio" name="agree" value="yes">
+    no: <input type="radio" name="agree" value="no">
+    <input type="submit" value="save">
+</form>
+
+
+</body>
+</html>

@@ -4,6 +4,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class Wallet {
@@ -14,10 +15,12 @@ public class Wallet {
 
     @Nullable
     private BigDecimal balance;
-    
 
     @OneToOne
     User user;
+
+    @OneToMany(mappedBy = "wallet")
+    private List<Operation> operations;
 
     public Wallet() {
     }
@@ -44,5 +47,13 @@ public class Wallet {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Operation> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(List<Operation> operations) {
+        this.operations = operations;
     }
 }

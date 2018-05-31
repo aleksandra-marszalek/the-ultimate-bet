@@ -6,4 +6,6 @@ import pl.coderslab.theultimatebet.entity.Wallet;
 public interface WalletService {
 
     public Wallet findWalletByUser(User user);
+
+    void save(Wallet wallet);
 }

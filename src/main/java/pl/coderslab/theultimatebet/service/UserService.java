@@ -7,6 +7,8 @@ public interface UserService {
 
     public User findByEmail(String email);
 
+    public User findById(Long id);
+
     public void saveUser(User user);
 
     public boolean checkUsername(User user);
@@ -14,4 +16,6 @@ public interface UserService {
     public void save(User user);
 
     public boolean checkEmail(User user);
+
+
 }
