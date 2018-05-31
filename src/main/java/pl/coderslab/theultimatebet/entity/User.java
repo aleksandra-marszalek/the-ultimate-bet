@@ -50,6 +50,10 @@ public class User {
     private Set<Role> roles;
 
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private Wallet wallet;
+
     public User() {
     }
 
@@ -115,5 +119,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 }

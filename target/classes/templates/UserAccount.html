@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> <head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table.minimalistBlack {
+            border: 3px solid #000000;
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+        table.minimalistBlack td, table.minimalistBlack th {
+            border: 1px solid #000000;
+            padding: 5px 4px;
+        }
+        table.minimalistBlack tbody td {
+            font-size: 13px;
+        }
+        table.minimalistBlack thead {
+            background: #CFCFCF;
+            background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+            background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+            background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+            border-bottom: 3px solid #000000;
+        }
+        table.minimalistBlack thead th {
+            font-size: 15px;
+            font-weight: bold;
+            color: #000000;
+            text-align: left;
+        }
+        table.minimalistBlack tfoot {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+            border-top: 3px solid #000000;
+        }
+        table.minimalistBlack tfoot td {
+            font-size: 14px;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<h2>Menu</h2>
+<table class="minimalistBlack">
+    <tr>
+        <td><a href="/">Home</a></td>
+        <td><a th:href="@{/user/{id}/wallet(id=${id})}">Go to my wallet</a></td>
+        <th><a th:href="@{/user/{id}/bets(id=${id})}">Go to my bets</a></th>
+    </tr>
+</table>
+
+</body>
+</html>

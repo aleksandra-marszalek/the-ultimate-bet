@@ -18,7 +18,9 @@
 
 <span sec:authorize="isAuthenticated()">
 
-        <p>Witaj, <span sec:authentication="name"></span></p>
+        <p>Hello, <span sec:authentication="name"></span></p>
+
+        <td><a th:href="@{/user/{id}/}">Go to my account</a></td>
 
         <form th:action="@{/logout}" method="POST">
 

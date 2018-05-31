@@ -31,7 +31,7 @@
     <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"> Cannot be empty</p>
 
 
-    <p> Email: <input type="text" th:field="*{email}" /></p>
+    <p> Email: <input type="email" th:field="*{email}" /></p>
 
     <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Email not valid</p>
 
