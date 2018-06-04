@@ -31,16 +31,18 @@ public class GameServiceImpl implements GameService {
         ResponseEntity<GameDto[]> responseGames = restTemplate.getForEntity(url, GameDto[].class);
         GameDto[] games = responseGames.getBody();
         for (GameDto game: games) {
-            Game g = new Game();
+            Game g;
             if (findById(game.getId()) != null) {
                 g = findById(game.getId());
+            } else {
+                g = new Game();
             }
             g.setId(game.getId());
             g.setGameTime(game.getGameTime());
             g.setOddsForTeam1(game.getOddsForTeam1());
             g.setOddsForTeam2(game.getOddsForTeam2());
             g.setPointsTeam1(game.getPointsTeam1());
-            g.setPointsTeam2(game.getPointsTeam1());
+            g.setPointsTeam2(game.getPointsTeam2());
             g.setSignature(game.getSignature());
             g.setStatus(game.getStatus());
             g.setTeam1(teamRepository.findTeamById(game.getTeam1Id()));
