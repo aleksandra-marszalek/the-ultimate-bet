@@ -23,7 +23,7 @@ public class TeamServiceImpl implements TeamService {
 
     ///////// from api /////////////
 
-    @Scheduled(fixedRate = 1000*60)
+    @Scheduled(fixedRate = 1000*10)
     public void getTeamsFromApi() {
         String url = "http://localhost:8090/team/";
         RestTemplate restTemplate = new RestTemplate();
