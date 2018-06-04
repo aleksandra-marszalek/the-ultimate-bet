@@ -1,4 +1,9 @@
 package pl.coderslab.theultimatebet.repository;
 
-public interface GameRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import pl.coderslab.theultimatebet.entity.Game;
+
+public interface GameRepository extends JpaRepository <Game, Long> {
+
+    Game findGameById (Long id);
 }

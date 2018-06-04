@@ -10,13 +10,13 @@ import java.util.List;
 public class GroupDto {
 
         @JsonProperty("id")
-        Long id;
+        private Long id;
 
         @JsonProperty("name")
-        String name;
+        private String name;
 
         @JsonProperty("teams")
-        List<Team> teams;
+        private List<Team> teams;
 
     public Long getId() {
         return id;
