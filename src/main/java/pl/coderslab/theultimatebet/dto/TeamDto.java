@@ -12,7 +12,7 @@ import java.util.List;
 public class TeamDto {
 
     @JsonProperty("id")
-    private Long id;
+    private Long apiId;
 
     @JsonProperty("name")
     private String name;
@@ -51,12 +51,21 @@ public class TeamDto {
     private int finalStanding;
 
 
-    public Long getId() {
-        return id;
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+
+
+    public Long getApiId() {
+        return apiId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setApiId(Long apiId) {
+        this.apiId = apiId;
     }
 
     public String getName() {

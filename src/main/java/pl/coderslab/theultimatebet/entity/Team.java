@@ -10,6 +10,8 @@ public class Team implements Comparable<Team>{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Long apiId;
+
     private String name;
 
     private int seeding;
@@ -142,6 +144,14 @@ public class Team implements Comparable<Team>{
 
     public void setFinalStanding(int finalStanding) {
         this.finalStanding = finalStanding;
+    }
+
+    public Long getApiId() {
+        return apiId;
+    }
+
+    public void setApiId(Long apiId) {
+        this.apiId = apiId;
     }
 
     @Override

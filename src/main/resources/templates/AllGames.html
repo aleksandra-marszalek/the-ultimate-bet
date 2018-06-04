@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"> <head>
-    <title>User Account</title>
+    <title>All Games</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         table.minimalistBlack {
@@ -39,16 +39,48 @@
             font-size: 14px;
         }
     </style>
-    <title>Title</title>
 </head>
 <body>
-<h2>Menu</h2>
+<h1>All Games</h1>
+<hr>
+
 <table class="minimalistBlack">
     <tr>
         <td><a href="/">Home</a></td>
-        <td><a th:href="@{/user/{id}/wallet(id=${id})}">Go to my wallet</a></td>
-        <th><a th:href="@{/user/{id}/bets(id=${id})}">Go to my bets</a></th>
-        <th><a th:href="@{/user/{id}/allGames(id=${id})}">Go to all games</a></th>
+        <td><a th:href="@{/user/{id}(id=${id})}">Go to my panel</a></td>
+    </tr>
+</table>
+
+<hr>
+<h2>Games Scheduled</h2>
+<table class="minimalistBlack">
+    <tr>
+        <th>game date & time</th>
+        <th>bet now!</th>
+        <th>teams</th>
+        <th>bet now!</th>
+    </tr>
+    <tr th:each="game: ${plannedGames}">
+        <td><p th:text="${game.gameTime}"></p></td>
+        <td><p th:text="${game.courseForTeam1}"></p></td>
+        <td><p th:text="|${game.team1.name} vs ${game.team2.name}|"></p></td>
+        <td><p th:text="${game.courseForTeam2}"></p></td>
+    </tr>
+</table>
+<hr>
+<h2>Games Finished</h2>
+<table class="minimalistBlack">
+    <tr>
+        <th>game date & time</th>
+        <th>score</th>
+        <th>teams</th>
+        <th>score</th>
+    </tr>
+    <tr th:each="game: ${finishedGames}">
+        <td><p th:text="${game.gameTime}"></p></td>
+        <td><p th:text="${game.pointsTeam1}"></p></td>
+        <td><p th:text="|${game.team1.name} vs ${game.team2.name}|"></p></td>
+        <td><p th:text="${game.pointsTeam2}"></p></td>
     </tr>
 </table>
 

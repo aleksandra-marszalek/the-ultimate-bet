@@ -11,6 +11,7 @@ import pl.coderslab.theultimatebet.CurrentUser;
 import pl.coderslab.theultimatebet.entity.Operation;
 import pl.coderslab.theultimatebet.entity.User;
 import pl.coderslab.theultimatebet.entity.Wallet;
+import pl.coderslab.theultimatebet.service.GameService;
 import pl.coderslab.theultimatebet.service.OperationService;
 import pl.coderslab.theultimatebet.service.UserService;
 import pl.coderslab.theultimatebet.service.WalletService;
@@ -31,6 +32,9 @@ public class userAccountController {
 
     @Autowired
     OperationService operationService;
+
+    @Autowired
+    GameService gameService;
 
     @GetMapping("/{id}")
     public String userAccount (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
@@ -89,6 +93,18 @@ public class userAccountController {
             operationService.save(operation);
         }
         return "redirect:/user/"+id+"/wallet";
+    }
+
+    @GetMapping("/{id}/allGames")
+    public String allGames (@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
+        if (customUser.getUser().getId()==id) {
+            model.addAttribute("plannedGames", gameService.findAllByStatus(0));
+            model.addAttribute("finishedGames", gameService.findAllByStatus(1));
+            model.addAttribute("id", id);
+            return "AllGames";
+        } else {
+            return "redirect:/";
+        }
     }
 
 }

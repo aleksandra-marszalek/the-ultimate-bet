@@ -29,10 +29,10 @@ public class GroupServiceImpl implements GroupService {
         GroupDto[] groups = responseGroups.getBody();
         for (GroupDto group: groups) {
             Group g = new Group();
-            if (groupRepository.findGroupById(group.getId()) != null) {
-                g = groupRepository.findGroupById(group.getId());
+            if (groupRepository.findGroupByApiId(group.getApiId()) != null) {
+                g = groupRepository.findGroupByApiId(group.getApiId());
             }
-            g.setId(group.getId());
+            g.setApiId(group.getApiId());
             g.setName(group.getName());
             groupRepository.save(g);
 
@@ -75,6 +75,6 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group findById(Long id) {
-        return groupRepository.findGroupById(id);
+        return groupRepository.findGroupByApiId(id);
     }
 }

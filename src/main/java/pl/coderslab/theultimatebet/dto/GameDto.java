@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class GameDto {
 
     @JsonProperty("id")
-    private Long id;
+    private Long apiId;
 
     @JsonProperty("team1_id")
     private Long team1Id;
@@ -38,12 +38,21 @@ public class GameDto {
     @JsonProperty("signature")
     private String signature;
 
-    public Long getId() {
-        return id;
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+
+
+    public Long getApiId() {
+        return apiId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setApiId(Long apiId) {
+        this.apiId = apiId;
     }
 
     public Long getTeam1Id() {

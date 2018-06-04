@@ -11,6 +11,8 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Long apiId;
+
     private String name;
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
@@ -42,5 +44,13 @@ public class Group {
 
     public void setTeams(List<Team> teams) {
         this.teams = teams;
+    }
+
+    public Long getApiId() {
+        return apiId;
+    }
+
+    public void setApiId(Long apiId) {
+        this.apiId = apiId;
     }
 }

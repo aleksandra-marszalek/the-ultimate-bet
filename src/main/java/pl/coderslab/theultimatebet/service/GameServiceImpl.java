@@ -12,6 +12,10 @@ import pl.coderslab.theultimatebet.entity.Team;
 import pl.coderslab.theultimatebet.repository.GameRepository;
 import pl.coderslab.theultimatebet.repository.TeamRepository;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
+
 @Service
 public class GameServiceImpl implements GameService {
 
@@ -32,12 +36,12 @@ public class GameServiceImpl implements GameService {
         GameDto[] games = responseGames.getBody();
         for (GameDto game: games) {
             Game g;
-            if (findById(game.getId()) != null) {
-                g = findById(game.getId());
+            if (findById(game.getApiId()) != null) {
+                g = findById(game.getApiId());
             } else {
                 g = new Game();
             }
-            g.setId(game.getId());
+            g.setApiId(game.getApiId());
             g.setGameTime(game.getGameTime());
             g.setOddsForTeam1(game.getOddsForTeam1());
             g.setOddsForTeam2(game.getOddsForTeam2());
@@ -45,8 +49,10 @@ public class GameServiceImpl implements GameService {
             g.setPointsTeam2(game.getPointsTeam2());
             g.setSignature(game.getSignature());
             g.setStatus(game.getStatus());
-            g.setTeam1(teamRepository.findTeamById(game.getTeam1Id()));
-            g.setTeam2(teamRepository.findTeamById(game.getTeam2Id()));
+            g.setCourseForTeam1(round((1.0/g.getOddsForTeam1())*1.10, 2));
+            g.setCourseForTeam2(round((1.0/g.getOddsForTeam2())*1.10, 2));
+            g.setTeam1(teamRepository.findTeamByApiId(game.getTeam1Id()));
+            g.setTeam2(teamRepository.findTeamByApiId(game.getTeam2Id()));
             gameRepository.save(g);
         }
     }
@@ -56,6 +62,22 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Game findById(Long id) {
-        return gameRepository.findGameById(id);
+        return gameRepository.findGameByApiId(id);
+    }
+
+    @Override
+    public List<Game> findAllByStatus(int status) {
+        return gameRepository.findAllByStatus(status);
+    }
+
+
+    /////////// other ///////////////
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

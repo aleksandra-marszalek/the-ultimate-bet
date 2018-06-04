@@ -11,6 +11,8 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Long apiId;
+
     @ManyToOne
     @JoinColumn(name = "team1_id")
     private Team team1;
@@ -27,7 +29,11 @@ public class Game {
 
     private double oddsForTeam1;
 
+    private double courseForTeam1;
+
     private double oddsForTeam2;
+
+    private double courseForTeam2;
 
     private int status;
 
@@ -114,6 +120,30 @@ public class Game {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public Long getApiId() {
+        return apiId;
+    }
+
+    public void setApiId(Long apiId) {
+        this.apiId = apiId;
+    }
+
+    public double getCourseForTeam1() {
+        return courseForTeam1;
+    }
+
+    public void setCourseForTeam1(double courseForTeam1) {
+        this.courseForTeam1 = courseForTeam1;
+    }
+
+    public double getCourseForTeam2() {
+        return courseForTeam2;
+    }
+
+    public void setCourseForTeam2(double courseForTeam2) {
+        this.courseForTeam2 = courseForTeam2;
     }
 }
 

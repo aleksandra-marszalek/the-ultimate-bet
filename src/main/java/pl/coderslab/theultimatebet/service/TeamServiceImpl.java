@@ -31,10 +31,10 @@ public class TeamServiceImpl implements TeamService {
         TeamDto[] teams = responseTeams.getBody();
         for (TeamDto team: teams) {
             Team t = new Team();
-            if (findById(team.getId()) != null) {
-                t = findById(team.getId());
+            if (findById(team.getApiId()) != null) {
+                t = findById(team.getApiId());
             }
-            t.setId(team.getId());
+            t.setApiId(team.getApiId());
             t.setName(team.getName());
             t.setFinalStanding(team.getFinalStanding());
             t.setLoserWinerSignature(team.getLoserWinerSignature());
@@ -44,7 +44,7 @@ public class TeamServiceImpl implements TeamService {
             t.setSeeding(team.getSeeding());
             t.setStrength(team.getStrength());
             t.setWon(team.getWon());
-            t.setGroup(groupRepository.findGroupById(team.getGroup_id()));
+            t.setGroup(groupRepository.findGroupByApiId(team.getGroup_id()));
             teamRepository.save(t);
         }
     }
@@ -54,6 +54,6 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team findById(Long id) {
-        return teamRepository.findTeamById(id);
+        return teamRepository.findTeamByApiId(id);
     }
 }
