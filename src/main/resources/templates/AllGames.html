@@ -29,9 +29,10 @@
                         <thead>
                         <tr>
                             <th>game date & time</th>
-                            <th>bet now!</th>
+                            <th>stake</th>
                             <th>teams</th>
-                            <th>bet now!</th>
+                            <th>stake</th>
+                            <th>place a bet!</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,7 @@
                             <td><p th:text="${game.courseForTeam1}"></p></td>
                             <td><p th:text="|${game.team1.name} vs ${game.team2.name}|"></p></td>
                             <td><p th:text="${game.courseForTeam2}"></p></td>
+                            <td><a th:href="@{/user/{id}/bets/{gameId}/addBet(id=${id}, gameId=${game.id})}">Place a bet</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -69,9 +71,9 @@
                         <tbody>
                         <tr class="tr-shadow" th:each="game: ${finishedGames}">
                             <td><p th:text="${game.gameTime}"></p></td>
-                            <td><p th:text="${game.courseForTeam1}"></p></td>
+                            <td><p th:text="${game.pointsTeam1}"></p></td>
                             <td><p th:text="|${game.team1.name} vs ${game.team2.name}|"></p></td>
-                            <td><p th:text="${game.courseForTeam2}"></p></td>
+                            <td><p th:text="${game.pointsTeam2}"></p></td>
                         </tr>
                         </tbody>
                     </table>
