@@ -1,54 +1,110 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<div th:replace="Header.html :: header"></div>-->
+<div th:replace="../static/base/DocHeader.html :: head" xmlns:th="http://www.w3.org/1999/xhtml">
+</div>
 
-<html xmlns:th="http://www.thymeleaf.org"
+<!--<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">-->
+    <!--<head th:replace="../static/base/DocHeader.html :: head" xmlns:th="http://www.w3.org/1999/xhtml">-->
 
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
-<head>
-
-    <title>Login View</title>
-
-</head>
-
-<body>
-
-<h1>Home</h1>
+    <!--</head>-->
+    <!--<body>-->
+<!--</div>-->
 
 
 
-<span sec:authorize="isAuthenticated()">
-
-        <p>Hello, <span sec:authentication="name"></span></p>
-
-        <td><a th:href="@{/user/{id}(id=${id})}">Go to my account</a></td>
-
-        <form th:action="@{/logout}" method="POST">
-
-            <input type="submit" value="Wyloguj"/>
-
-
-
-        </form>
-
-</span>
+    <header class="header-desktop3 d-none d-lg-block">
+        <div class="section__content section__content--p35">
+            <div class="header3-wrap">
+                <!--<div class="header__logo">-->
+                    <!--<p>Hell</p>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </header>
+    <!-- END HEADER DESKTOP-->
 
 
 
-<span sec:authorize="!isAuthenticated()">
-
-    <a th:href="@{/login}">You need to log in</a>.
-
-    <hr>
-
-    <a th:href="@{/newUser}">Add new user</a>
-    <a th:href="@{/addUser}">Add new admin</a>
-
-    </span>
+    <!-- PAGE CONTENT-->
+    <div class="page-content--bgf7">
 
 
+        <!-- WELCOME-->
+        <section class="welcome p-t-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title-4">Welcome to the ultimate bet
+                        </h1>
+                        <hr class="line-seprate">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END WELCOME-->
 
+        <section class="statistic statistic2">
+                <div class="container">
+                    <p>Get in the game now!</p>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/login}"><button type="button" class="btn btn-outline-success">Log in</button></a>
+                    <a class="dropdown-item" th:href="@{/newuser}"><button type="button" class="btn btn-outline-primary">Register</button></a>
+                    <div class="dropdown-divider"></div>
+                </div>
+        </section>
 
+        <!-- STATISTIC-->
+        <section class="statistic statistic2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="statistic__item statistic__item--green">
+                            <h2 class="number">10,368</h2>
+                            <span class="desc">members online</span>
+                            <div class="icon">
+                                <i class="zmdi zmdi-account-o"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="statistic__item statistic__item--orange">
+                            <h2 class="number">388,688</h2>
+                            <span class="desc">items sold</span>
+                            <div class="icon">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="statistic__item statistic__item--blue">
+                            <h2 class="number">1,086</h2>
+                            <span class="desc">this week</span>
+                            <div class="icon">
+                                <i class="zmdi zmdi-calendar-note"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="statistic__item statistic__item--red">
+                            <h2 class="number">$1,060,386</h2>
+                            <span class="desc">total earnings</span>
+                            <div class="icon">
+                                <i class="zmdi zmdi-money"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-</body>
+        </body>
 
+        <!-- END STATISTIC-->
+
+        <div th:fragment="footer" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">
+            <div th:replace="../static/base/Footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+            <div th:replace="../static/base/DocFooter.html :: docFooter" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+        </div><!-- end document-->
+    </div>
 </html>

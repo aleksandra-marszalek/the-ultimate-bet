@@ -19,11 +19,11 @@ public class HelloController {
 
     @GetMapping("/")
     public String home (@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        model.addAttribute("currentUser", customUser);
         try {
             Long id = customUser.getUser().getId();
-            model.addAttribute("id", id);
             if (customUser.getUser().getId()!=null) {
+                model.addAttribute("currentUser", customUser);
+                model.addAttribute("id", id);
                 return "homeLogged";
             }
         } catch (Exception e) {
