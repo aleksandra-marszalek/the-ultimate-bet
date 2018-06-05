@@ -3,6 +3,7 @@ package pl.coderslab.theultimatebet.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -71,6 +72,7 @@ public class BetController {
             }
         }
 
+        @Transactional
         @PostMapping("/{id}/bets/{gameId}/addBet")
         public String addBet(@Valid @ModelAttribute Bet bet, BindingResult result,
                              @PathVariable Long id, @PathVariable Long gameId, Model model,
