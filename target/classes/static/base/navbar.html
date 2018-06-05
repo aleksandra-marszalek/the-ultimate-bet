@@ -3,15 +3,13 @@
     <div class="section__content section__content--p35">
         <div class="header3-wrap">
             <div class="header__logo">
-                <a href="#">
-                    <img src="images/icon/logo-white.png" alt="CoolAdmin" />
-                </a>
+                <p th:text="|Hello, ${currentUser.username}|"/>
             </div>
             <div class="header__navbar">
                 <ul class="list-unstyled">
                     <li class="has-sub">
-                        <a href="/user/{id}/wallet(id=${id})">Go to my wallet</a>
-                            <i class="fas fa-tachometer-alt"></i>Wallet
+                        <a th:href="/user/{id}/wallet(id=${id})">
+                            <i class="fas fa-tachometer-alt"></i>Go to my wallet
                             <span class="bot-line"></span>
                         </a>
                         <ul class="header3-sub-list list-unstyled">
@@ -31,13 +29,10 @@
                     </li>
                     <li>
                         <a th:href="@{/user/{id}/allGames(id=${id})}">Go to all games</a>
-                            <i class="fas fa-trophy"></i>
-                            <span class="bot-line"></span>Features</a>
+                            <!--<span class="bot-line"></span>Features</a>-->
                     </li>
                     <li>
                         <a th:href="@{/user/{id}/bets(id=${id})}">Go to my bets</a>
-                        <i class="fas fa-trophy"></i>
-                        <span class="bot-line"></span>Features</a>
                     </li>
                 </ul>
             </div>
@@ -118,7 +113,8 @@
                     </div>
                 </div>
                 <form th:action="@{/logout}" method="POST" style="z-index:99;">
-                    <input type="submit" value="Wyloguj"/>
+                    <!--<input type="submit" value="Wyloguj"/>-->
+                    <button type="submit" class="btn btn-outline-secondary">Logout</button>
                 </form>
 
             <!--<div class="account-wrap">-->
