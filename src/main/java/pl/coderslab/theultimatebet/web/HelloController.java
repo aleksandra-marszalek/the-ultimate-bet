@@ -23,7 +23,7 @@ public class HelloController {
             Long id = customUser.getUser().getId();
             model.addAttribute("id", id);
             if (customUser.getUser().getId()!=null) {
-                return "HomeLogged";
+                return "home";
             }
         } catch (Exception e) {
             return "home";

@@ -1,8 +1,12 @@
-<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">
-    <head th:replace="../static/base/DocHeader.html :: head" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
 
-    </head>
-    <body>
+<!--<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">-->
+    <!--<head th:replace="../static/base/DocHeader.html :: head" xmlns:th="http://www.w3.org/1999/xhtml">-->
+
+    <!--</head>-->
+    <!--<body>-->
 </div>
 
 
@@ -114,3 +118,4 @@
             <div th:replace="../static/base/DocFooter.html :: docFooter" xmlns:th="http://www.w3.org/1999/xhtml"></div>
         </div><!-- end document-->
     </div>
+</html>

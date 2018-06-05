@@ -117,11 +117,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="header-button-item js-item-menu">
-                    <a href="/logout" class="btn btn-outline-secondary"  role="button">
-                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-                </div>
-                <!--<div class="account-wrap">-->
+                <form th:action="@{/logout}" method="POST" style="z-index:99;">
+                    <input type="submit" value="Wyloguj"/>
+                </form>
+
+            <!--<div class="account-wrap">-->
                     <!--<div class="account-item account-item&#45;&#45;style2 clearfix js-item-menu">-->
                         <!--<div class="content">-->
                             <!--<a class="js-acc-btn" href="#">john doe</a>-->
@@ -162,8 +162,8 @@
                     <!--</div>-->
                 <!--</div>-->
             </div>
+
         </div>
     </div>
 </header>
 </div>
-</html>

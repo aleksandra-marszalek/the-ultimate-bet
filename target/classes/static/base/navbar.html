@@ -1,4 +1,4 @@
-<div th:fragment="nav" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">
+<div th:fragment="nav" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag" xmlns:sec="http://www.w3.org/1999/xhtml">
 <header class="header-desktop3 d-none d-lg-block">
     <div class="section__content section__content--p35">
         <div class="header3-wrap">
@@ -10,7 +10,7 @@
             <div class="header__navbar">
                 <ul class="list-unstyled">
                     <li class="has-sub">
-                        <a th:href="@{/user/{id}/wallet(id=${id})}">Go to my wallet</a>
+                        <a href="/user/{id}/wallet(id=${id})">Go to my wallet</a>
                             <i class="fas fa-tachometer-alt"></i>Wallet
                             <span class="bot-line"></span>
                         </a>
@@ -117,11 +117,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="header-button-item js-item-menu">
-                    <a href="/logout" class="btn btn-outline-secondary"  role="button">
-                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-                </div>
-                <!--<div class="account-wrap">-->
+                <form th:action="@{/logout}" method="POST" style="z-index:99;">
+                    <input type="submit" value="Wyloguj"/>
+                </form>
+
+            <!--<div class="account-wrap">-->
                     <!--<div class="account-item account-item&#45;&#45;style2 clearfix js-item-menu">-->
                         <!--<div class="content">-->
                             <!--<a class="js-acc-btn" href="#">john doe</a>-->
@@ -162,8 +162,8 @@
                     <!--</div>-->
                 <!--</div>-->
             </div>
+
         </div>
     </div>
 </header>
 </div>
-</html>
