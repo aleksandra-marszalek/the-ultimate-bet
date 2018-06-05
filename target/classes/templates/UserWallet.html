@@ -1,89 +1,113 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"> <head>
-    <title>User Wallet</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table.minimalistBlack {
-            border: 3px solid #000000;
-            width: 100%;
-            text-align: left;
-            border-collapse: collapse;
-        }
-        table.minimalistBlack td, table.minimalistBlack th {
-            border: 1px solid #000000;
-            padding: 5px 4px;
-        }
-        table.minimalistBlack tbody td {
-            font-size: 13px;
-        }
-        table.minimalistBlack thead {
-            background: #CFCFCF;
-            background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            border-bottom: 3px solid #000000;
-        }
-        table.minimalistBlack thead th {
-            font-size: 15px;
-            font-weight: bold;
-            color: #000000;
-            text-align: left;
-        }
-        table.minimalistBlack tfoot {
-            font-size: 14px;
-            font-weight: bold;
-            color: #000000;
-            border-top: 3px solid #000000;
-        }
-        table.minimalistBlack tfoot td {
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-<h1>User Wallet</h1>
-<hr>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
 
-<table class="minimalistBlack">
-    <tr>
-        <td><a href="/">Home</a></td>
-        <td><a th:href="@{/user/{id}(id=${id})}">Go to my panel</a></td>
-    </tr>
-</table>
-
-<hr>
-<h2>Actual balance</h2>
-<p th:text="${info}"></p>
-<table class="minimalistBlack">
-    <tr>
-        <td><p th:text="${wallet.balance}"></p></td>
-    </tr>
-</table>
-<h2>Add money</h2>
-<table class="minimalistBlack">
-    <tr>
-        <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=10)}">Add 10 PLN</a></td>
-        <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=20)}">Add 20 PLN</a></td>
-        <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=50)}">Add 50 PLN</a></td>
-        <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=100)}">Add 100 PLN</a></td>
-    </tr>
-</table>
-<h2>Last operations</h2>
-<table class="minimalistBlack">
-    <tr>
-        <th>operation id</th>
-        <th>title</th>
-        <th>amount</th>
-        <th>created</th>
-    </tr>
-    <tr th:each="operation: ${operations}">
-        <td><p th:text="${operation.id}"></p></td>
-        <td><p th:text="${operation.title}"></p></td>
-        <td><p th:text="${operation.amount}"></p></td>
-        <td><p th:text="${operation.created}"></p></td>
-    </tr>
-</table>
+<!-- WELCOME-->
+<section class="welcome p-t-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-4">
+                    All games
+                </h1>
+                <hr class="line-seprate">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END WELCOME-->
 
 
-</body>
-</html>
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">Actual balance</h3>
+                <div class="table-responsive table-responsive-data2">
+                    <p th:text="${info}"></p>
+                    <table class="table table-data2">
+                        <tbody>
+                        <tr class="tr-shadow">
+                            <td><p th:text="${wallet.balance}"></p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">Add money</h3>
+                <div class="table-responsive table-responsive-data2">
+                    <p th:text="${info}"></p>
+                    <table class="table table-data2">
+                        <tbody>
+                        <tr class="tr-shadow">
+                            <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=10)}">
+                                <button type="button" class="btn btn-outline-success">Add 10 PLN</button>
+                            </a></td>
+                            <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=20)}">
+                                <button type="button" class="btn btn-outline-success">Add 20 PLN</button>
+                            </a></td>
+                            <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=50)}">
+                                <button type="button" class="btn btn-outline-success">Add 50 PLN</button>
+                            </a></td>
+                            <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=100)}">
+                                <button type="button" class="btn btn-outline-success">Add 100 PLN</button>
+                            </a></td>
+                            <td><a th:href="@{/user/{id}/wallet/addMoney/{amount}(id=${id},amount=200)}">
+                                <button type="button" class="btn btn-outline-success">Add 200 PLN</button>
+                            </a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">Last operations</h3>
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                        <tr>
+                            <th>operation id</th>
+                            <th>title</th>
+                            <th>amount</th>
+                            <th>created</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr-shadow"th:each="operation: ${operations}">
+                            <td><p th:text="${operation.id}"></p></td>
+                            <td><p th:text="${operation.title}"></p></td>
+                            <td><p th:text="${operation.amount}"></p></td>
+                            <td><p th:text="${operation.created}"></p></td>
+                        </tr>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+
+
+
+
+<div th:replace="Footer.html :: footer"></div>

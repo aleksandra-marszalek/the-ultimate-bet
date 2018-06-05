@@ -50,6 +50,7 @@ public class userAccountController {
     @GetMapping("/{id}/wallet")
     public String showWallet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
         if (customUser.getUser().getId() == id) {
+            model.addAttribute("currentUser", customUser);
             Wallet wallet = walletService.findWalletByUser(customUser.getUser());
             model.addAttribute("wallet", wallet);
             List<Operation> lastOps = operationService.findAllByWalletLast(wallet);
