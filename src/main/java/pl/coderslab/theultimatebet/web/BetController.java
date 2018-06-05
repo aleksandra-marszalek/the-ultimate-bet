@@ -4,11 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.theultimatebet.CurrentUser;
 import pl.coderslab.theultimatebet.entity.*;
 import pl.coderslab.theultimatebet.service.*;
+import pl.coderslab.theultimatebet.validationGroups.ValidationUser;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -58,6 +62,8 @@ public class BetController {
                 model.addAttribute("game", game);
 //                model.addAttribute("games", gameService.findAllByStatus(0));
                 Bet bet = new Bet();
+                bet.setGame(game);
+                bet.setUser(customUser.getUser());
                 model.addAttribute("bet", bet);
                 return "addBet";
             } else {
@@ -65,9 +71,45 @@ public class BetController {
             }
         }
 
-        @PostMapping
-        public String addBet() {
-            return null;
+        @PostMapping("/{id}/bets/{gameId}/addBet")
+        public String addBet(@Valid @ModelAttribute Bet bet, BindingResult result,
+                             @PathVariable Long id, @PathVariable Long gameId, Model model,
+                             @AuthenticationPrincipal CurrentUser customUser) {
+            model.addAttribute("currentUser", customUser);
+            model.addAttribute("id", id);
+            if (result.hasErrors()) {
+                return "addBet";
+            }
+            if (gameId==1) {
+                model.addAttribute("info", "This game has already finished. You cannot place a bet anymore. " +
+                        "Use menu to go back to another games.");
+                return "addBet";
+            }
+            if (customUser.getUser().getWallet().getBalance().compareTo(bet.getAmount())<0) {
+                model.addAttribute("info2", "You don't have enough money. " +
+                        "Select another amount or add some money to your account now!");
+                return "addBet";
+            }
+            if (bet.getTeam().equals(gameService.findById(gameId).getTeam1())) {
+                bet.setCourse(BigDecimal.valueOf(gameService.findById(gameId).getCourseForTeam1()));
+            } else {
+                bet.setCourse(BigDecimal.valueOf(gameService.findById(gameId).getCourseForTeam2()));
+            }
+            bet.setUser(customUser.getUser());
+            bet.setGame(gameService.findById(gameId));
+            bet.setCreated(LocalDateTime.now());
+            bet.setTotalAmount(bet.getAmount().multiply(bet.getCourse()));
+            betService.save(bet);
+            Wallet wallet = walletService.findWalletByUser(customUser.getUser());
+            wallet.setBalance(wallet.getBalance().subtract(bet.getAmount()));
+            Operation operation = new Operation();
+            operation.setTitle("placed a bet");
+            operation.setWallet(wallet);
+            operation.setAmount(bet.getAmount());
+            operation.setCreated(LocalDateTime.now());
+            operationService.save(operation);
+            walletService.save(wallet);
+            return "redirect:/user/"+id+"/bets";
         }
 
 

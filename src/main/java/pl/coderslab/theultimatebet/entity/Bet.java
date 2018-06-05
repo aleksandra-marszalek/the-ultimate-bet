@@ -1,6 +1,7 @@
 package pl.coderslab.theultimatebet.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

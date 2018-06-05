@@ -25,5 +25,10 @@ public class BetServiceImpl implements BetService {
         return betRepository.findAllByUserId(id);
     }
 
+    @Override
+    public void save(Bet bet) {
+        betRepository.save(bet);
+    }
+
 
 }

@@ -23,18 +23,21 @@
         </div>
         <div class="card-body card-block">
             <form th:action="@{/user/{id}/bets/{gameId}/addBet(id=${id}, gameId=${game.id})}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <p th:text="${info}"></p>
+                <p th:text="${info2}"></p>
                 <div class="form-group">
                     <div class="col col-md-3">
                         <label for="select" class=" form-control-label">Team</label>
                     </div>
                     <div class="col-12 col-md-9">
-                        <select name="select" id="select" class="form-control" th:field="*{bet.game}">
+                        <select name="select" id="select" class="form-control" th:field="*{bet.team}">
                             <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="control-label mb-1">Amount</label>
-                        <input id="cc-pament" th:name="cc-payment" th:type="number" class="form-control" aria-required="true" aria-invalid="false" value="50.00">
+                        <input id="cc-pament" th:name="cc-payment"  th:field="*{bet.amount}"
+                               th:type="number" class="form-control" aria-required="true" aria-invalid="false" value="50.00">
                     </div>
                 </div>
                 <div class="card-footer">
