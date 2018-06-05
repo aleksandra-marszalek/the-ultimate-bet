@@ -1,54 +1,151 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"> <head>
-    <title>Registration</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> </head>
-<body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-<form th:action="@{/newUser}" th:object="${user}" method="post">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Register new user</title>
+
+    <!-- Fontfaces CSS-->
+    <link th:href="@{font-face.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/font-awesome-5/css/fontawesome-all.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/mdi-font/css/material-design-iconic-font.min.css}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link th:href="@{/vendor/bootstrap-4.1/bootstrap.min.css}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link th:href="@{/vendor/animsition/animsition.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/wow/animate.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/css-hamburgers/hamburgers.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/slick/slick.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/select2/select2.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link th:href="@{/css/theme.css}" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+<div class="page-wrapper">
+    <div class="page-content--bge5">
+        <div class="container">
+            <div class="login-wrap">
+                <div class="login-content">
+                    <div class="login-logo">
+                        <a href="#">
+                            <img th:src="@{/images/icon/logo.png}" alt="CoolAdmin">
+                            <h1> The ultimate bet</h1>
+                        </a>
+                    </div>
+                    <div class="login-form">
+                        <form th:action="@{/newUser}" th:object="${user}" method="post">
+                            <div class="form-group">
+                                <p th:text="${info}"></p>
+                                <p th:text="${info2}"></p>
+                                <p th:text="${info3}"></p>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input class="au-input au-input--full" type="text" th:field="*{username}" name="username" placeholder="Username"/>
+
+                                        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> Username not valid</p>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input class="au-input au-input--full" type="email" th:field="*{email}" name="email" placeholder="Email">
+
+                                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Email not valid</p>
+
+                                    </div>
+                                </div>
+                            </div>
 
 
-    <p th:text="${info}"></p>
-    <p th:text="${info2}"></p>
-    <p th:text="${info3}"></p>
+                            <div class="form-group">
+                                <label>Password </label>
+                                <input class="au-input au-input--full" type="password" th:field="*{password}" name="password" placeholder="password">
+                                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Password not valid</p>
+                            </div>
 
-    <p> Username: <input type="text" th:field="*{username}" /></p>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>First name</label>
+                                        <input class="au-input au-input--full" type="text" th:field="*{firstname}" name="text" placeholder="First name">
+                                        <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"> Cannot be empty</p>
+                                    </div>
+                                </div>
 
-    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> Username not valid</p>
-
-
-
-    <p> Password: <input type="password" th:field="*{password}" /></p>
-
-    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Password not valid</p>
-
-    <p> Firstname: <input type="text" th:field="*{firstname}" /></p>
-
-    <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"> Cannot be empty</p>
-
-
-    <p> Lastname: <input type="text" th:field="*{lastname}" /></p>
-
-    <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"> Cannot be empty</p>
-
-
-    <p> Email: <input type="email" th:field="*{email}" /></p>
-
-    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Email not valid</p>
-
-
-    <div>
-        <label>Are you 18 years old or more?</label>
-    <div>
-        <input type="checkbox" th:field="*{adult}" value="true"  th:checked="${false}"/>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Last name</label>
+                                        <input class="au-input au-input--full" input type="text" th:field="*{lastname}" name="lastname" placeholder="Last name">
+                                        <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"> Cannot be empty</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="login-checkbox">
+                                <label>
+                                    Are you 18 years old or more?
+                                    <input type="checkbox" th:field="*{adult}" value="true"  th:checked="${false}">
+                                </label>
+                            </div>
+                            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+                        </form>
+                        <div class="register-link">
+                            <p>
+                                Already have account?
+                                <a th:href="@{/login}">Sign In</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
 
+</div>
 
-    <input type="hidden" th:field="*{id}" />
+<!-- Jquery JS-->
+<script th:src="@{/vendor/jquery-3.2.1.min.js}"></script>
+<!-- Bootstrap JS-->
+<script th:src="@{/vendor/bootstrap-4.1/popper.min.js}"></script>
+<script th:src="@{/vendor/bootstrap-4.1/bootstrap.min.js}"></script>
+<!-- Vendor JS       -->
+<script th:src="@{/vendor/slick/slick.min.js}">
+</script>
+<script th:src="@{/vendor/wow/wow.min.js}"></script>
+<script th:src="@{/vendor/animsition/animsition.min.js}"></script>
+<script th:src="@{/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js}">
+</script>
+<script th:src="@{/vendor/counter-up/jquery.waypoints.min.js}"></script>
+<script th:src="@{/vendor/counter-up/jquery.counterup.min.js}">
+</script>
+<script th:src="@{/vendor/circle-progress/circle-progress.min.js}"></script>
+<script th:src="@{/vendor/perfect-scrollbar/perfect-scrollbar.js}"></script>
+<script th:src="@{/vendor/chartjs/Chart.bundle.min.js}"></script>
+<script th:src="@{/vendor/select2/select2.min.js}">
+</script>
 
-    <p><input type="submit"	value="save" /></p>
+<!-- Main JS-->
+<script th:src="@{/js/main.js}"></script>
 
-</form>
 </body>
 
 </html>

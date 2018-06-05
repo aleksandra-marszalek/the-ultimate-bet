@@ -12,10 +12,6 @@ import pl.coderslab.theultimatebet.entity.User;
 import pl.coderslab.theultimatebet.service.UserService;
 import pl.coderslab.theultimatebet.validationGroups.ValidationUser;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.time.LocalDateTime;
-
 @Controller
 public class userController {
 
