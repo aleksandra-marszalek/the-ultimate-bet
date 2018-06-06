@@ -70,6 +70,11 @@ public class BetServiceImpl implements BetService {
 
     }
 
+    @Override
+    public List<Bet> findAllByUserIdAndResult (Long id, String result) {
+        return betRepository.findAllByUserIdAndResult(id, result);
+    }
+
 
 
 }

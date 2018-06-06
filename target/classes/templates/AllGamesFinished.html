@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="title-4">
-                    All games
+                    All finished games
                 </h1>
                 <hr class="line-seprate">
             </div>
@@ -18,39 +18,6 @@
 <!-- END WELCOME-->
 
 
-<!-- DATA TABLE-->
-<section class="p-t-20">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="title-5 m-b-35">Games Scheduled</h3>
-                <div class="table-responsive table-responsive-data2">
-                    <table class="table table-data2">
-                        <thead>
-                        <tr>
-                            <th>game date & time</th>
-                            <th>stake</th>
-                            <th>teams</th>
-                            <th>stake</th>
-                            <th>place a bet!</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="tr-shadow" th:each="game: ${plannedGames}">
-                            <td><p th:text="${game.gameTime}"></p></td>
-                            <td><p th:text="${game.courseForTeam1}"></p></td>
-                            <td><p th:text="|${game.team1.name} vs ${game.team2.name}|"></p></td>
-                            <td><p th:text="${game.courseForTeam2}"></p></td>
-                            <td><a th:href="@{/user/{id}/bets/{gameId}/addBet(id=${id}, gameId=${game.id})}">Place a bet</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- END DATA TABLE-->
 
 <!-- DATA TABLE-->
 <section class="p-t-20">

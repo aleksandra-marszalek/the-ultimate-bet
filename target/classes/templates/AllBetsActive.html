@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<!-- WELCOME-->
+<section class="welcome p-t-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-4">
+                    All bets
+                </h1>
+                <hr class="line-seprate">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END WELCOME-->
+
+
+<!-- DATA TABLE-->
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">My active bets</h3>
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>created</th>
+                            <th>teams</th>
+                            <th>my team</th>
+                            <th>stake</th>
+                            <th>amount /// possible win</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr-shadow" th:each="bet: ${allBets}">
+                            <td><p th:text="${bet.id}"></p></td>
+                            <td><p th:text="${bet.created}"></p></td>
+                            <td><p th:text="|${bet.game.team1.name} vs ${bet.game.team2.name}|"></p></td>
+                            <td><p th:text="${bet.team.name}"></p></td>
+                            <td><p th:text="${bet.course}"></p></td>
+                            <td><p th:text="|${bet.amount} /// ${bet.totalAmount}|"></p></td>
+                            <td><a th:href="@{/}">see details</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+<!-- END DATA TABLE-->
+
+
+
+
+<div th:replace="Footer.html :: footer"></div>

@@ -50,6 +50,39 @@ public class BetController {
             }
         }
 
+
+    @GetMapping("/{id}/bets/active")
+    public String allBetsActive (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
+        if (customUser.getUser().getId() == id) {
+            model.addAttribute("currentUser", customUser);
+            List<Bet> allBets = betService.findAllByUserIdAndResult(id, null);
+            model.addAttribute("allBets", allBets);
+            return "AllBetsActive";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+
+    @GetMapping("/{id}/bets/finished")
+    public String allBetsFinished (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
+        if (customUser.getUser().getId() == id) {
+            model.addAttribute("currentUser", customUser);
+            List<Bet> all = betService.findAllByUserId(id);
+            List<Bet> allBets = new ArrayList<>();
+            for (Bet b: all) {
+                if (b.getResult()!=null) {
+                    allBets.add(b);
+                }
+            }
+            model.addAttribute("allBets", allBets);
+            return "AllBetsFinished";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+
         @GetMapping("/{id}/bets/{gameId}/addBet")
         public String addBet (@PathVariable Long id, @PathVariable Long gameId, @AuthenticationPrincipal CurrentUser customUser, Model model) {
             if (customUser.getUser().getId() == id) {
@@ -86,12 +119,12 @@ public class BetController {
             }
             if (gameService.findById(gameId).getStatus()==1) {
                 model.addAttribute("info", "This game has already finished. You cannot place a bet anymore. " +
-                        "Use menu to go back to another games.");
+                        "Use menu to place another bet.");
                 return "error";
             }
             if (customUser.getUser().getWallet().getBalance().compareTo(bet.getAmount())==-1) {
                 model.addAttribute("info2", "You don't have enough money. " +
-                        "Select another amount or add some money to your account now!");
+                        "Go back to bet to select another amount or add some money to your account ASAP not to miss the opportunity to bet!");
                 return "error";
             }
             if (bet.getTeam().equals(gameService.findById(gameId).getTeam1())) {

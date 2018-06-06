@@ -96,18 +96,5 @@ public class userAccountController {
         return "redirect:/user/"+id+"/wallet";
     }
 
-    @GetMapping("/{id}/allGames")
-    public String allGames (@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        if (customUser.getUser().getId()==id) {
-            model.addAttribute("currentUser", customUser);
-            model.addAttribute("plannedGames", gameService.findAllByStatus(0));
-            model.addAttribute("finishedGames", gameService.findAllByStatus(1));
-            model.addAttribute("id", id);
-            return "AllGames";
-        } else {
-            return "redirect:/";
-        }
-    }
-
 
 }

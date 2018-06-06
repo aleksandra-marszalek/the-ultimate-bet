@@ -11,4 +11,6 @@ public interface BetService {
     public List<Bet> findAllByUserId (Long id);
 
     public void save (Bet bet);
+
+    public List<Bet> findAllByUserIdAndResult (Long id, String result);
 }

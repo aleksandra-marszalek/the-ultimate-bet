@@ -7,32 +7,63 @@
             </div>
             <div class="header__navbar">
                 <ul class="list-unstyled">
-                    <li class="has-sub">
+                    <li>
+                        <a th:href="@{/}">Home</a>
+                        <!--<span class="bot-line"></span>Features</a>-->
+                    </li>
+                    <li>
                         <a th:href="@{/user/{id}/wallet(id=${id})}">
-                            Go to my wallet
+                            My wallet
+                        </a>
+                        <!--<ul class="header3-sub-list list-unstyled">-->
+                            <!--<li>-->
+                                <!--<a th:href="@{/user/{id}/wallet(id=${id})"}>Add money</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a th:href="@{/user/{id}/wallet(id=${id})"}>See transactions</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li class="has-sub">
+                        <a th:href="@{/user/{id}/allGames(id=${id})}">All games
+                        <span class="bot-line"></span>
+                        </a>
+                        <ul class="header3-sub-list list-unstyled">
+                            <li>
+                                <a th:href="@{/user/{id}/allGames/scheduled(id=${id})}">Scheduled games</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/user/{id}/allGames/finished(id=${id})}">Finished games</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a th:href="@{/user/{id}/bets(id=${id})}">
+                            My bets
                             <span class="bot-line"></span>
                         </a>
                         <ul class="header3-sub-list list-unstyled">
                             <li>
-                                <a href="index.html">Add money</a>
+                                <a th:href="@{/user/{id}/bets/active(id=${id})}">Active bets</a>
                             </li>
                             <li>
-                                <a href="index2.html">See transactions</a>
-                            </li>
-                            <li>
-                                <a href="index3.html">Dashboard 3</a>
-                            </li>
-                            <li>
-                                <a href="index4.html">Dashboard 4</a>
+                                <a th:href="@{/user/{id}/bets/finished(id=${id})}">Finished bets</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a th:href="@{/user/{id}/allGames(id=${id})}">Go to all games</a>
-                            <!--<span class="bot-line"></span>Features</a>-->
-                    </li>
-                    <li>
-                        <a th:href="@{/user/{id}/bets(id=${id})}">Go to my bets</a>
+                    <li class="has-sub">
+                        <a th:href="@{/user/{id}/teams(id=${id})}">
+                            All teams
+                            <span class="bot-line"></span>
+                        </a>
+                        <ul class="header3-sub-list list-unstyled">
+                            <li>
+                                <a th:href="@{/user/{id}/wallet(id=${id})}">aaa</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/user/{id}/wallet(id=${id})}">bbb</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
