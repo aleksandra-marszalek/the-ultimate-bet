@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="title-4">
-                    All teams
+                    Favourite teams
                 </h1>
                 <hr class="line-seprate">
             </div>
@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="title-5 m-b-35"> Teams ordered by seeding</h3>
+                <h3 class="title-5 m-b-35"> My favourite teams</h3>
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2">
                         <thead>
@@ -47,7 +47,6 @@
                             <td><p th:text="${team.pointBalance}"></p></td>
                             <td>
                                 <a th:href="@{/user/{id}/teams/{teamId}/(id=${id}, teamId=${team.id})}">Team card</a>
-                                <a th:href="@{/user/{id}/teams/addToFavourite/{teamId}/(id=${id}, teamId=${team.id})}">Add to favourite</a>
                             </td>
                         </tr>
                         </tbody>

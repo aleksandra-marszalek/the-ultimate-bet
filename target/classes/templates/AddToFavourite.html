@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<div th:replace="Header.html :: header"></div>-->
+<div th:replace="../static/base/DocHeader.html :: head" xmlns:th="http://www.w3.org/1999/xhtml">
+</div>
+
+<!--<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">-->
+<!--<head th:replace="../static/base/DocHeader.html :: head" xmlns:th="http://www.w3.org/1999/xhtml">-->
+
+<!--</head>-->
+<!--<body>-->
+<!--</div>-->
+
+
+
+<header class="header-desktop3 d-none d-lg-block">
+    <div class="section__content section__content--p35">
+        <div class="header3-wrap">
+            <!--<div class="header__logo">-->
+            <!--<p>Hell</p>-->
+            <!--</div>-->
+        </div>
+    </div>
+</header>
+<!-- END HEADER DESKTOP-->
+
+
+
+<!-- PAGE CONTENT-->
+<div class="page-content--bgf7">
+
+
+
+    <!-- WELCOME-->
+    <section class="welcome p-t-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Add to favourite</h1>
+                    <p th:text="|Are you sure to add the team: ${team.name} to your favourites'?'|"></p>
+                    <form method="post" th:action="@{user/{id}/teams/addToFavourite/{teamId}/(id=${id}, teamId=${team.id})}">
+                        yes: <input type="radio" name="agree" value="yes">
+                        no: <input type="radio" name="agree" value="no">
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <!--<input type="submit" value="submit">-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- END WELCOME-->
+
+</body>
+
+<!-- END STATISTIC-->
+
+<div th:fragment="footer" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">
+    <div th:replace="../static/base/Footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+    <div th:replace="../static/base/DocFooter.html :: docFooter" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+</div><!-- end document-->
+</div>
+</html>

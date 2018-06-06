@@ -2,15 +2,15 @@ package pl.coderslab.theultimatebet.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.coderslab.theultimatebet.entity.Role;
-import pl.coderslab.theultimatebet.entity.User;
-import pl.coderslab.theultimatebet.entity.Wallet;
+import pl.coderslab.theultimatebet.entity.*;
 import pl.coderslab.theultimatebet.repository.RoleRepository;
 import pl.coderslab.theultimatebet.repository.UserRepository;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService {
         wallet.setBalance(BigDecimal.ZERO);
         wallet.setUser(user);
         user.setWallet(wallet);
+        Favourite favourite = new Favourite();
+        List<Team> teams = new ArrayList<>();
+        favourite.setTeams(teams);
+        favourite.setUser(user);
+        user.setFavourite(favourite);
         userRepository.save(user);
     }
 

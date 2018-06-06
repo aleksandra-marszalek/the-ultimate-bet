@@ -54,6 +54,10 @@ public class User {
     @JoinColumn
     private Wallet wallet;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private Favourite favourite;
+
     public User() {
     }
 
@@ -127,5 +131,13 @@ public class User {
 
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
+    }
+
+    public Favourite getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Favourite favourite) {
+        this.favourite = favourite;
     }
 }

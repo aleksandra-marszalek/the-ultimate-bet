@@ -45,7 +45,10 @@
                             <td><p th:text="${team.won}"></p></td>
                             <td><p th:text="${team.lost}"></p></td>
                             <td><p th:text="${team.pointBalance}"></p></td>
-                            <td><a th:href="@{/user/{id}/teams/{teamId}/(id=${id}, teamId=${team.id})}">Team card</a></td>
+                            <td>
+                                <a th:href="@{/user/{id}/teams/{teamId}/(id=${id}, teamId=${team.id})}">Team card</a>
+                                <a th:href="@{/user/{id}/teams/addToFavourite/{teamId}/(id=${id}, teamId=${team.id})}">Add to favourite</a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
