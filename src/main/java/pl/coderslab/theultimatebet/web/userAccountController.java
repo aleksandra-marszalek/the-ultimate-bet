@@ -78,7 +78,7 @@ public class userAccountController {
     }
 
     @PostMapping("/{id}/wallet/addMoney/{amount}")
-    public String addMoney (@PathVariable Long id, @PathVariable Integer amount, @RequestParam String agree) {
+    public String addMoney (@PathVariable Long id, @PathVariable Integer amount, @RequestParam String agree, @AuthenticationPrincipal CurrentUser currentUser) {
         if (agree.equals("yes")) {
             User user = userService.findById(id);
             Wallet wallet = walletService.findWalletByUser(user);
