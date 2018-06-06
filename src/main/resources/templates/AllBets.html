@@ -48,7 +48,7 @@
                             <td><p th:text="${bet.course}"></p></td>
                             <td><p th:text="|${bet.amount} /// ${bet.totalAmount}|"></p></td>
                             <td><p th:text="${bet.result}"></p></td>
-                            <td><a th:href="@{/}">see details</a></td>
+                            <td><a th:href="@{/user/{id}/bets/{betId}(id=${bet.user.id}, betId=${bet.id})}">see details</a></td>
                         </tr>
                         </tbody>
                     </table>

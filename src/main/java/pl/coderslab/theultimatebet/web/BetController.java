@@ -51,36 +51,49 @@ public class BetController {
         }
 
 
-    @GetMapping("/{id}/bets/active")
-    public String allBetsActive (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-        if (customUser.getUser().getId() == id) {
-            model.addAttribute("currentUser", customUser);
-            List<Bet> allBets = betService.findAllByUserIdAndResult(id, null);
-            model.addAttribute("allBets", allBets);
-            return "AllBetsActive";
-        } else {
-            return "redirect:/";
-        }
-    }
-
-
-    @GetMapping("/{id}/bets/finished")
-    public String allBetsFinished (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-        if (customUser.getUser().getId() == id) {
-            model.addAttribute("currentUser", customUser);
-            List<Bet> all = betService.findAllByUserId(id);
-            List<Bet> allBets = new ArrayList<>();
-            for (Bet b: all) {
-                if (b.getResult()!=null) {
-                    allBets.add(b);
-                }
+        @GetMapping("/{id}/bets/active")
+        public String allBetsActive (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
+            if (customUser.getUser().getId() == id) {
+                model.addAttribute("currentUser", customUser);
+                List<Bet> allBets = betService.findAllByUserIdAndResult(id, null);
+                model.addAttribute("allBets", allBets);
+                return "AllBetsActive";
+            } else {
+                return "redirect:/";
             }
-            model.addAttribute("allBets", allBets);
-            return "AllBetsFinished";
-        } else {
-            return "redirect:/";
         }
-    }
+
+
+        @GetMapping("/{id}/bets/finished")
+        public String allBetsFinished (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
+            if (customUser.getUser().getId() == id) {
+                model.addAttribute("currentUser", customUser);
+                List<Bet> all = betService.findAllByUserId(id);
+                List<Bet> allBets = new ArrayList<>();
+                for (Bet b: all) {
+                    if (b.getResult()!=null) {
+                        allBets.add(b);
+                    }
+                }
+                model.addAttribute("allBets", allBets);
+                return "AllBetsFinished";
+            } else {
+                return "redirect:/";
+            }
+        }
+
+
+        @GetMapping("/{id}/bets/{betId}")
+        public String singleBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser customUser, Model model) {
+            if ((customUser.getUser().getId() == id) && (betService.findById(betId).getUser().getId()==id)) {
+                model.addAttribute("currentUser", customUser);
+                Bet bet = betService.findById(betId);
+                model.addAttribute("bet", bet);
+                return "SingleBetPage";
+            } else {
+                return "redirect:/";
+            }
+        }
 
 
         @GetMapping("/{id}/bets/{gameId}/addBet")
@@ -94,7 +107,6 @@ public class BetController {
                 teams.add(game.getTeam2());
                 model.addAttribute("teams", teams);
                 model.addAttribute("game", game);
-//                model.addAttribute("games", gameService.findAllByStatus(0));
                 Bet bet = new Bet();
                 bet.setGame(game);
                 bet.setUser(customUser.getUser());
@@ -105,7 +117,7 @@ public class BetController {
             }
         }
 
-//        @Transactional
+        @Transactional
         @PostMapping("/{id}/bets/{gameId}/addBet")
         public String addBet(@Valid @ModelAttribute Bet bet, BindingResult result,
                              @PathVariable Long id, @PathVariable Long gameId, Model model,
@@ -150,33 +162,4 @@ public class BetController {
         }
 
 
-//    @GetMapping("/{id}/bets)
-//    public String allBets (@PathVariable Long id, @PathVariable Integer amount, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-//        if (customUser.getUser().getId() == id) {
-//            model.addAttribute("amount", amount);
-//            model.addAttribute("id", id);
-//            return "addMoney";
-//        } else {
-//            return "redirect:/";
-//        }
-//    }
-//
-//    @PostMapping("/{id}/wallet/addMoney/{amount}")
-//    public String addMoney (@PathVariable Long id, @PathVariable Integer amount, @RequestParam String agree) {
-//        if (agree.equals("yes")) {
-//            User user = userService.findById(id);
-//            Wallet wallet = walletService.findWalletByUser(user);
-//            BigDecimal amountDecimal = BigDecimal.valueOf(amount);
-//            wallet.setBalance(wallet.getBalance().add(amountDecimal));
-//            walletService.save(wallet);
-//
-//            Operation operation = new Operation();
-//            operation.setCreated(LocalDateTime.now());
-//            operation.setAmount(amountDecimal);
-//            operation.setWallet(wallet);
-//            operation.setTitle("add money");
-//            operationService.save(operation);
-//        }
-//        return "redirect:/user/"+id+"/wallet";
-//    }
 }
