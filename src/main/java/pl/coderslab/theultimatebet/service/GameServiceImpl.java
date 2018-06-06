@@ -22,6 +22,7 @@ public class GameServiceImpl implements GameService {
     @Autowired
     GameRepository gameRepository;
 
+
     @Autowired
     TeamRepository teamRepository;
 
@@ -36,8 +37,8 @@ public class GameServiceImpl implements GameService {
         GameDto[] games = responseGames.getBody();
         for (GameDto game: games) {
             Game g;
-            if (findById(game.getApiId()) != null) {
-                g = findById(game.getApiId());
+            if (findByApiId(game.getApiId()) != null) {
+                g = findByApiId(game.getApiId());
             } else {
                 g = new Game();
             }
@@ -61,7 +62,10 @@ public class GameServiceImpl implements GameService {
     //////////// crud ////////////////
 
     @Override
-    public Game findById(Long id) {
+    public Game findById (Long id) { return gameRepository.findGameById(id); }
+
+    @Override
+    public Game findByApiId(Long id) {
         return gameRepository.findGameByApiId(id);
     }
 

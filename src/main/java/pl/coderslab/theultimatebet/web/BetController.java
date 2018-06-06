@@ -72,25 +72,27 @@ public class BetController {
             }
         }
 
-        @Transactional
+//        @Transactional
         @PostMapping("/{id}/bets/{gameId}/addBet")
         public String addBet(@Valid @ModelAttribute Bet bet, BindingResult result,
                              @PathVariable Long id, @PathVariable Long gameId, Model model,
                              @AuthenticationPrincipal CurrentUser customUser) {
             model.addAttribute("currentUser", customUser);
             model.addAttribute("id", id);
+            model.addAttribute("bet", bet);
+            model.addAttribute("gameId", gameId);
             if (result.hasErrors()) {
                 return "addBet";
             }
-            if (gameId==1) {
+            if (gameService.findById(gameId).getStatus()==1) {
                 model.addAttribute("info", "This game has already finished. You cannot place a bet anymore. " +
                         "Use menu to go back to another games.");
-                return "addBet";
+                return "error";
             }
-            if (customUser.getUser().getWallet().getBalance().compareTo(bet.getAmount())<0) {
+            if (customUser.getUser().getWallet().getBalance().compareTo(bet.getAmount())==-1) {
                 model.addAttribute("info2", "You don't have enough money. " +
                         "Select another amount or add some money to your account now!");
-                return "addBet";
+                return "error";
             }
             if (bet.getTeam().equals(gameService.findById(gameId).getTeam1())) {
                 bet.setCourse(BigDecimal.valueOf(gameService.findById(gameId).getCourseForTeam1()));

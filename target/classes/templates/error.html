@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<div th:replace="Header.html :: header"></div>-->
+<div th:replace="../static/base/DocHeader.html :: head" xmlns:th="http://www.w3.org/1999/xhtml">
+</div>
+
+<header class="header-desktop3 d-none d-lg-block">
+    <div class="section__content section__content--p35">
+        <div class="header3-wrap">
+            <!--<div class="header__logo">-->
+            <!--<p>Hell</p>-->
+            <!--</div>-->
+        </div>
+    </div>
+</header>
+<!-- END HEADER DESKTOP-->
+
+
+
+<!-- PAGE CONTENT-->
+<div class="page-content--bgf7">
+
+
+    <!-- WELCOME-->
+    <section class="welcome p-t-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="title-4">
+                        Error!
+                    </h1>
+                    <a th:href="@{/}">Go back to home</a>
+                    <p th:text="${info}"></p>
+                    <p th:text="${info2}"></p>
+                    <hr class="line-seprate">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END WELCOME-->
+
+
+
+
+    </body>
+
+    <!-- END STATISTIC-->
+
+    <div th:fragment="footer" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">
+        <div th:replace="../static/base/Footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+        <div th:replace="../static/base/DocFooter.html :: docFooter" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+    </div><!-- end document-->
+</div>
+</html>

@@ -23,8 +23,6 @@
         </div>
         <div class="card-body card-block">
             <form th:action="@{/user/{id}/bets/{gameId}/addBet(id=${id}, gameId=${game.id})}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                <p th:text="${info}"></p>
-                <p th:text="${info2}"></p>
                 <div class="form-group">
                     <div class="col col-md-3">
                         <label for="select" class=" form-control-label">Team</label>

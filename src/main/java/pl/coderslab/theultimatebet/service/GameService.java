@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface GameService {
 
+    public Game findByApiId (Long id);
+
     public Game findById (Long id);
 
     public List<Game> findAllByStatus (int status);
