@@ -37,8 +37,8 @@ public class userAccountController {
     GameService gameService;
 
     @GetMapping("/{id}")
-    public String userAccount (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-        if (customUser.getUser().getId() == id) {
+    public String userAccount (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        if (currentUser.getUser().getId() == id) {
             model.addAttribute("id", id);
             return "UserAccount";
         } else {
@@ -48,10 +48,10 @@ public class userAccountController {
     }
 
     @GetMapping("/{id}/wallet")
-    public String showWallet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-        if (customUser.getUser().getId() == id) {
-            model.addAttribute("currentUser", customUser);
-            Wallet wallet = walletService.findWalletByUser(customUser.getUser());
+    public String showWallet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        if (currentUser.getUser().getId() == id) {
+            model.addAttribute("currentUser", currentUser);
+            Wallet wallet = walletService.findWalletByUser(currentUser.getUser());
             model.addAttribute("wallet", wallet);
             List<Operation> lastOps = operationService.findAllByWalletLast(wallet);
             model.addAttribute("operations", lastOps);
@@ -67,8 +67,8 @@ public class userAccountController {
     }
 
     @GetMapping("/{id}/wallet/addMoney/{amount}")
-    public String addMoney (@PathVariable Long id, @PathVariable Integer amount, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-        if (customUser.getUser().getId() == id) {
+    public String addMoney (@PathVariable Long id, @PathVariable Integer amount, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        if (currentUser.getUser().getId() == id) {
             model.addAttribute("amount", amount);
             model.addAttribute("id", id);
             return "addMoney";

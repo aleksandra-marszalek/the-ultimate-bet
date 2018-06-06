@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="title-4">
-                    Bet details
+                    Team details
                 </h1>
                 <hr class="line-seprate">
             </div>
@@ -24,44 +24,52 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="title-5 m-b-35">Bet details</h3>
+                <h3 class="title-5 m-b-35">Details</h3>
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2">
                         <tbody>
                         <tr>
                             <td>id</td>
-                            <th><p th:text="${bet.id}"></p></th>
+                            <th><p th:text="${team.id}"></p></th>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>created</td>
-                            <th><p th:text="${bet.created}"></p></th>
+                            <td>team</td>
+                            <th><p th:text="${team.name}"></p></th>
                         </tr>
                         <tr>
-                            <td>game date & time</td>
-                            <th><p th:text="${bet.game.gameTime}"></p></th>
+                            <td>games</td>
+                            <th>
+                            <ul th:each="game: ${games}">
+                            <li><p th:text="|game time: ${game.gameTime} : ${game.team1.name} vs ${game.team2.name} |">
+                            </p>
+                            </li>
+                            </ul>
+                            </th>
+                        </td>
+                            </th>
+                        </tr>
+                            <td>strength</td>
+                            <th><p th:text="${team.strength}"></p></th>
                         </tr>
                         <tr>
-                            <td>teams</td>
-                            <th><p th:text="|${bet.game.team1.name} vs ${bet.game.team2.name}|"></p></th>
+                            <td>seeding</td>
+                            <th><p th:text="${team.seeding}"></p></th>
                         </tr>
                         <tr>
-                            <td>my choice</td>
-                            <th><p th:text="${bet.team.name}"></p></th>
+                            <td>won</td>
+                            <th><p th:text="${team.won}"></p></th>
                         </tr>
                         <tr>
-                            <td>stake</td>
-                            <th><p th:text="${bet.course}"></p></th>
+                            <td>lost</td>
+                            <th><p th:text="${team.lost}"></p></th>
                         </tr>
                         <tr>
-                            <td>amount placed/// possible win</td>
-                            <th><p th:text="|${bet.amount} /// ${bet.totalAmount}|"></p></th>
+                            <td>point balance</td>
+                            <th><p th:text="${team.pointBalance}"></p></th>
                         </tr>
-                        <tr>
-                            <td>status</td>
-                            <th><p th:text="${bet.result}"></p></th>
-                        </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

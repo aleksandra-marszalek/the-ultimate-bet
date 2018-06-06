@@ -30,9 +30,9 @@ public class GameController {
     GameService gameService;
 
     @GetMapping("/{id}/allGames")
-    public String allGames (@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        if (customUser.getUser().getId()==id) {
-            model.addAttribute("currentUser", customUser);
+    public String allGames (@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getUser().getId()==id) {
+            model.addAttribute("currentUser", currentUser);
             model.addAttribute("plannedGames", gameService.findAllByStatus(0));
             model.addAttribute("finishedGames", gameService.findAllByStatus(1));
             model.addAttribute("id", id);
@@ -43,9 +43,9 @@ public class GameController {
     }
 
     @GetMapping("/{id}/allGames/scheduled")
-    public String allGamesScheduled (@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        if (customUser.getUser().getId()==id) {
-            model.addAttribute("currentUser", customUser);
+    public String allGamesScheduled (@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getUser().getId()==id) {
+            model.addAttribute("currentUser", currentUser);
             model.addAttribute("plannedGames", gameService.findAllByStatus(0));
             model.addAttribute("id", id);
             return "AllGamesScheduled";
@@ -55,9 +55,9 @@ public class GameController {
     }
 
     @GetMapping("/{id}/allGames/finished")
-    public String allGamesFinished (@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        if (customUser.getUser().getId()==id) {
-            model.addAttribute("currentUser", customUser);
+    public String allGamesFinished (@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getUser().getId()==id) {
+            model.addAttribute("currentUser", currentUser);
             model.addAttribute("finishedGames", gameService.findAllByStatus(1));
             model.addAttribute("id", id);
             return "AllGamesFinished";

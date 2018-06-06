@@ -39,9 +39,9 @@ public class BetController {
         BetService betService;
 
         @GetMapping("/{id}/bets")
-        public String allBets(@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-            if (customUser.getUser().getId() == id) {
-                model.addAttribute("currentUser", customUser);
+        public String allBets(@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+            if (currentUser.getUser().getId() == id) {
+                model.addAttribute("currentUser", currentUser);
                 List<Bet> allBets = betService.findAllByUserId(id);
                 model.addAttribute("allBets", allBets);
                 return "AllBets";
@@ -52,9 +52,9 @@ public class BetController {
 
 
         @GetMapping("/{id}/bets/active")
-        public String allBetsActive (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-            if (customUser.getUser().getId() == id) {
-                model.addAttribute("currentUser", customUser);
+        public String allBetsActive (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+            if (currentUser.getUser().getId() == id) {
+                model.addAttribute("currentUser", currentUser);
                 List<Bet> allBets = betService.findAllByUserIdAndResult(id, null);
                 model.addAttribute("allBets", allBets);
                 return "AllBetsActive";
@@ -65,9 +65,9 @@ public class BetController {
 
 
         @GetMapping("/{id}/bets/finished")
-        public String allBetsFinished (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-            if (customUser.getUser().getId() == id) {
-                model.addAttribute("currentUser", customUser);
+        public String allBetsFinished (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+            if (currentUser.getUser().getId() == id) {
+                model.addAttribute("currentUser", currentUser);
                 List<Bet> all = betService.findAllByUserId(id);
                 List<Bet> allBets = new ArrayList<>();
                 for (Bet b: all) {
@@ -84,9 +84,9 @@ public class BetController {
 
 
         @GetMapping("/{id}/bets/{betId}")
-        public String singleBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-            if ((customUser.getUser().getId() == id) && (betService.findById(betId).getUser().getId()==id)) {
-                model.addAttribute("currentUser", customUser);
+        public String singleBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+            if ((currentUser.getUser().getId() == id) && (betService.findById(betId).getUser().getId()==id)) {
+                model.addAttribute("currentUser", currentUser);
                 Bet bet = betService.findById(betId);
                 model.addAttribute("bet", bet);
                 if (bet.getResult()==null) {
@@ -100,9 +100,9 @@ public class BetController {
         }
 
     @GetMapping("/{id}/bets/{betId}/cancel")
-    public String cancelBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-        if ((customUser.getUser().getId() == id) && (betService.findById(betId).getUser().getId()==id)) {
-            model.addAttribute("currentUser", customUser);
+    public String cancelBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        if ((currentUser.getUser().getId() == id) && (betService.findById(betId).getUser().getId()==id)) {
+            model.addAttribute("currentUser", currentUser);
             Bet bet = betService.findById(betId);
             model.addAttribute("bet", bet);
             model.addAttribute("id", id);
@@ -114,9 +114,9 @@ public class BetController {
 
     @Transactional
     @PostMapping("/{id}/bets/{betId}/cancel")
-    public String cancelBet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser,
+    public String cancelBet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable Long betId, @RequestParam String agree, Model model) {
-        model.addAttribute("currentUser", customUser);
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("id", id);
         if (agree.equals("yes")) {
             Bet bet = betService.findById(betId);
@@ -142,9 +142,9 @@ public class BetController {
 
 
         @GetMapping("/{id}/bets/{gameId}/addBet")
-        public String addBet (@PathVariable Long id, @PathVariable Long gameId, @AuthenticationPrincipal CurrentUser customUser, Model model) {
-            if (customUser.getUser().getId() == id) {
-                model.addAttribute("currentUser", customUser);
+        public String addBet (@PathVariable Long id, @PathVariable Long gameId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+            if (currentUser.getUser().getId() == id) {
+                model.addAttribute("currentUser", currentUser);
                 model.addAttribute("id", id);
                 Game game = gameService.findById(gameId);
                 List<Team> teams = new ArrayList<>();
@@ -154,7 +154,7 @@ public class BetController {
                 model.addAttribute("game", game);
                 Bet bet = new Bet();
                 bet.setGame(game);
-                bet.setUser(customUser.getUser());
+                bet.setUser(currentUser.getUser());
                 model.addAttribute("bet", bet);
                 return "addBet";
             } else {
@@ -166,8 +166,8 @@ public class BetController {
         @PostMapping("/{id}/bets/{gameId}/addBet")
         public String addBet(@Valid @ModelAttribute Bet bet, BindingResult result,
                              @PathVariable Long id, @PathVariable Long gameId, Model model,
-                             @AuthenticationPrincipal CurrentUser customUser) {
-            model.addAttribute("currentUser", customUser);
+                             @AuthenticationPrincipal CurrentUser currentUser) {
+            model.addAttribute("currentUser", currentUser);
             model.addAttribute("id", id);
             model.addAttribute("bet", bet);
             model.addAttribute("gameId", gameId);
@@ -183,7 +183,7 @@ public class BetController {
                 model.addAttribute("info3", "Bet value must be bigger than 0! Try again with another amount!");
                 return "error";
             }
-            if (customUser.getUser().getWallet().getBalance().compareTo(bet.getAmount())==-1) {
+            if (currentUser.getUser().getWallet().getBalance().compareTo(bet.getAmount())==-1) {
                 model.addAttribute("info2", "You don't have enough money. " +
                         "Go back to bet to select another amount or add some money to your account ASAP not to miss the opportunity to bet!");
                 return "error";
@@ -193,12 +193,12 @@ public class BetController {
             } else {
                 bet.setCourse(BigDecimal.valueOf(gameService.findById(gameId).getCourseForTeam2()));
             }
-            bet.setUser(customUser.getUser());
+            bet.setUser(currentUser.getUser());
             bet.setGame(gameService.findById(gameId));
             bet.setCreated(LocalDateTime.now());
             bet.setTotalAmount(bet.getAmount().multiply(bet.getCourse()));
             betService.save(bet);
-            Wallet wallet = walletService.findWalletByUser(customUser.getUser());
+            Wallet wallet = walletService.findWalletByUser(currentUser.getUser());
             wallet.setBalance(wallet.getBalance().subtract(bet.getAmount()));
             Operation operation = new Operation();
             operation.setTitle("placed a bet");

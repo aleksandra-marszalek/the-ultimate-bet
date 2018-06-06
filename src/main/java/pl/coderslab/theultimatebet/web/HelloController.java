@@ -18,11 +18,11 @@ public class HelloController {
     UserService userService;
 
     @GetMapping("/")
-    public String home (@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String home (@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         try {
-            Long id = customUser.getUser().getId();
-            if (customUser.getUser().getId()!=null) {
-                model.addAttribute("currentUser", customUser);
+            Long id = currentUser.getUser().getId();
+            if (currentUser.getUser().getId()!=null) {
+                model.addAttribute("currentUser", currentUser);
                 model.addAttribute("id", id);
                 return "homeLogged";
             }

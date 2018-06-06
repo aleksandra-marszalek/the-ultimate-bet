@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="title-4">
-                    All finished games
+                    All teams
                 </h1>
                 <hr class="line-seprate">
             </div>
@@ -18,29 +18,34 @@
 <!-- END WELCOME-->
 
 
-
 <!-- DATA TABLE-->
 <section class="p-t-20">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="title-5 m-b-35">Games Finished</h3>
+                <h3 class="title-5 m-b-35"> Team ranking by current strength</h3>
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2">
                         <thead>
                         <tr>
-                            <th>game date & time</th>
-                            <th>score</th>
-                            <th>teams</th>
-                            <th>score</th>
+                            <th>name</th>
+                            <th>strength</th>
+                            <th>seeding</th>
+                            <th>won</th>
+                            <th>lost</th>
+                            <th>point balance</th>
+                            <th>more...</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="tr-shadow" th:each="game: ${finishedGames}">
-                            <td><p th:text="${game.gameTime}"></p></td>
-                            <td><p th:text="${game.pointsTeam1}"></p></td>
-                            <td><p th:text="|${game.team1.name} vs ${game.team2.name}|"></p></td>
-                            <td><p th:text="${game.pointsTeam2}"></p></td>
+                        <tr class="tr-shadow" th:each="team: ${allTeams}">
+                            <td><p th:text="${team.name}"></p></td>
+                            <td><p th:text="${team.strength}"></p></td>
+                            <td><p th:text="${team.seeding}"></p></td>
+                            <td><p th:text="${team.won}"></p></td>
+                            <td><p th:text="${team.lost}"></p></td>
+                            <td><p th:text="${team.pointBalance}"></p></td>
+                            <td><a th:href="@{/user/{id}/teams/{teamId}/(id=${id}, teamId=${team.id})}">Team card</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -50,7 +55,6 @@
     </div>
 </section>
 <!-- END DATA TABLE-->
-
 
 
 

@@ -4,7 +4,6 @@ package pl.coderslab.theultimatebet.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import pl.coderslab.theultimatebet.entity.Team;
-import pl.coderslab.theultimatebet.repository.TeamRepository;
 import pl.coderslab.theultimatebet.service.TeamService;
 
 public class TeamConverter implements Converter<String, Team> {
@@ -14,6 +13,6 @@ public class TeamConverter implements Converter<String, Team> {
 
     @Override
     public Team convert(String s) {
-        return teamService.findById(Long.parseLong(s));
+        return teamService.findByApiId(Long.parseLong(s));
     }
 }
