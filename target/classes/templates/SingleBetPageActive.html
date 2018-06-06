@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<!-- WELCOME-->
+<section class="welcome p-t-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-4">
+                    Bet details
+                </h1>
+                <hr class="line-seprate">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END WELCOME-->
+
+
+<!-- DATA TABLE-->
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">Bet details</h3>
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                        <th><a th:href="@{/user/{id}/bets/{betId}/cancel(id=${bet.user.id}, betId=${bet.id})}">
+                            <button type="button" class="btn btn-outline-warning">Cancel bet</button>
+                        </a>
+                        </th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>id</td>
+                            <th><p th:text="${bet.id}"></p></th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>created</td>
+                            <th><p th:text="${bet.created}"></p></th>
+                        </tr>
+                        <tr>
+                            <td>teams</td>
+                            <th><p th:text="|${bet.game.team1.name} vs ${bet.game.team2.name}|"></p></th>
+                        </tr>
+                        <tr>
+                            <td>stakes</td>
+                            <th><p th:text="|${bet.game.courseForTeam1} vs ${bet.game.courseForTeam2}|"></p></th>
+                        </tr>
+                        <tr>
+                            <td>game date & time</td>
+                            <th><p th:text="${bet.game.gameTime}"></p></th>
+                        </tr>
+                        <tr>
+                            <td>my choice</td>
+                            <th><p th:text="${bet.team.name}"></p></th>
+                        </tr>
+                        <tr>
+                            <td>amount placed/// possible win</td>
+                            <th><p th:text="|${bet.amount} /// ${bet.totalAmount}|"></p></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+<!-- END DATA TABLE-->
+
+
+
+
+<div th:replace="Footer.html :: footer"></div>

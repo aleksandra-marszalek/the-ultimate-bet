@@ -27,6 +27,9 @@ public class BetServiceImpl implements BetService {
     @Autowired
     WalletService walletService;
 
+
+    //////////// crud /////////////
+
     @Override
     public Bet findById(Long id) {
         return betRepository.findBetById(id);
@@ -41,6 +44,20 @@ public class BetServiceImpl implements BetService {
     public void save(Bet bet) {
         betRepository.save(bet);
     }
+
+    @Override
+    public List<Bet> findAllByUserIdAndResult (Long id, String result) {
+        return betRepository.findAllByUserIdAndResult(id, result);
+    }
+
+    @Override
+    public void delete(Bet bet) {
+        betRepository.delete(bet);
+    }
+
+
+
+    ///////////// scheduled /////////////
 
     @Scheduled(fixedRate = 5000)
     public void updateBet() {
@@ -70,10 +87,7 @@ public class BetServiceImpl implements BetService {
 
     }
 
-    @Override
-    public List<Bet> findAllByUserIdAndResult (Long id, String result) {
-        return betRepository.findAllByUserIdAndResult(id, result);
-    }
+
 
 
 

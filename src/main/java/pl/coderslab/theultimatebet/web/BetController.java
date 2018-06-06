@@ -89,11 +89,56 @@ public class BetController {
                 model.addAttribute("currentUser", customUser);
                 Bet bet = betService.findById(betId);
                 model.addAttribute("bet", bet);
-                return "SingleBetPage";
+                if (bet.getResult()==null) {
+                   return "SingleBetPageActive";
+                } else {
+                    return "SingleBetPage";
+                }
             } else {
                 return "redirect:/";
             }
         }
+
+    @GetMapping("/{id}/bets/{betId}/cancel")
+    public String cancelBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser customUser, Model model) {
+        if ((customUser.getUser().getId() == id) && (betService.findById(betId).getUser().getId()==id)) {
+            model.addAttribute("currentUser", customUser);
+            Bet bet = betService.findById(betId);
+            model.addAttribute("bet", bet);
+            model.addAttribute("id", id);
+            return "cancelBet";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @Transactional
+    @PostMapping("/{id}/bets/{betId}/cancel")
+    public String cancelBet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser,
+                             @PathVariable Long betId, @RequestParam String agree, Model model) {
+        model.addAttribute("currentUser", customUser);
+        model.addAttribute("id", id);
+        if (agree.equals("yes")) {
+            Bet bet = betService.findById(betId);
+            if (bet.getGame().getStatus()==1) {
+                model.addAttribute("info", "This game has already finished. You cannot cancel this bet anymore.");
+                return "error";
+            }
+            else {
+                Wallet wallet = walletService.findWalletByUser(bet.getUser());
+                wallet.setBalance(wallet.getBalance().add(bet.getAmount().multiply(BigDecimal.valueOf(0.9))));
+                Operation operation = new Operation();
+                operation.setTitle("cancel bet nr " + bet.getId() + " - return money");
+                operation.setWallet(wallet);
+                operation.setAmount(bet.getAmount().multiply(BigDecimal.valueOf(0.9)));
+                operation.setCreated(LocalDateTime.now());
+                operationService.save(operation);
+                walletService.save(wallet);
+                betService.delete(bet);
+            }
+        }
+        return "redirect:/user/"+id+"/wallet";
+    }
 
 
         @GetMapping("/{id}/bets/{gameId}/addBet")

@@ -13,4 +13,6 @@ public interface BetService {
     public void save (Bet bet);
 
     public List<Bet> findAllByUserIdAndResult (Long id, String result);
+
+    public void delete(Bet bet);
 }
