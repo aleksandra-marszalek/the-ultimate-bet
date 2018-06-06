@@ -179,6 +179,10 @@ public class BetController {
                         "Use menu to place another bet.");
                 return "error";
             }
+            if (bet.getAmount().compareTo(BigDecimal.ZERO)==-1 || bet.getAmount().compareTo(BigDecimal.ZERO)==0) {
+                model.addAttribute("info3", "Bet value must be bigger than 0! Try again with another amount!");
+                return "error";
+            }
             if (customUser.getUser().getWallet().getBalance().compareTo(bet.getAmount())==-1) {
                 model.addAttribute("info2", "You don't have enough money. " +
                         "Go back to bet to select another amount or add some money to your account ASAP not to miss the opportunity to bet!");

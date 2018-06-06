@@ -39,20 +39,20 @@
                             <th><p th:text="${bet.created}"></p></th>
                         </tr>
                         <tr>
-                            <td>teams</td>
-                            <th><p th:text="|${bet.game.team1.name} vs ${bet.game.team2.name}|"></p></th>
-                        </tr>
-                        <tr>
-                            <td>stakes</td>
-                            <th><p th:text="|${bet.game.courseForTeam1} vs ${bet.game.courseForTeam2}|"></p></th>
-                        </tr>
-                        <tr>
                             <td>game date & time</td>
                             <th><p th:text="${bet.game.gameTime}"></p></th>
                         </tr>
                         <tr>
+                            <td>teams</td>
+                            <th><p th:text="|${bet.game.team1.name} vs ${bet.game.team2.name}|"></p></th>
+                        </tr>
+                        <tr>
                             <td>my choice</td>
                             <th><p th:text="${bet.team.name}"></p></th>
+                        </tr>
+                        <tr>
+                            <td>stake</td>
+                            <th><p th:text="${bet.course}"></p></th>
                         </tr>
                         <tr>
                             <td>amount placed/// possible win</td>
@@ -61,7 +61,6 @@
                         <tr>
                             <td>status</td>
                             <th><p th:text="${bet.result}"></p></th>
-
                         </tr>
                     </table>
                 </div>
