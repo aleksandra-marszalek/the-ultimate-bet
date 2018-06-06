@@ -70,7 +70,7 @@ public class ApiServiceImpl implements ApiService {
 
     private ArrayList<JSONObject> teams = new ArrayList<>();
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 1000*60*24)
     public void regenerateTeams() throws org.json.JSONException {
         teams.clear();
         List<Team> allTeams = teamRepository.findAll();
