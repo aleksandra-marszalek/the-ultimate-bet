@@ -19,6 +19,8 @@ import java.util.List;
 @Service
 public class GameServiceImpl implements GameService {
 
+    // TODO: sort by date
+
     @Autowired
     GameRepository gameRepository;
 

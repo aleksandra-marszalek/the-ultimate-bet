@@ -9,6 +9,9 @@ import pl.coderslab.theultimatebet.repository.WalletRepository;
 @Service
 public class WalletServiceImpl implements WalletService {
 
+    // TODO: sort by date
+    // TODO: withdrawal possibility
+
     @Autowired
     WalletRepository walletRepository;
 
