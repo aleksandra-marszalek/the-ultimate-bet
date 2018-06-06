@@ -6,9 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.coderslab.theultimatebet.dto.GameDto;
-import pl.coderslab.theultimatebet.dto.TeamDto;
 import pl.coderslab.theultimatebet.entity.Game;
-import pl.coderslab.theultimatebet.entity.Team;
 import pl.coderslab.theultimatebet.repository.GameRepository;
 import pl.coderslab.theultimatebet.repository.TeamRepository;
 
@@ -19,7 +17,7 @@ import java.util.List;
 @Service
 public class GameServiceImpl implements GameService {
 
-    // TODO: sort by date
+
 
     @Autowired
     GameRepository gameRepository;
@@ -73,7 +71,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<Game> findAllByStatus(int status) {
-        return gameRepository.findAllByStatus(status);
+        return gameRepository.findAllByStatusOrderByGameTimeDesc(status);
     }
 
 

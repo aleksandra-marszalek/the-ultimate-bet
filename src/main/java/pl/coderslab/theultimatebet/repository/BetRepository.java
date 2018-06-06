@@ -9,10 +9,10 @@ public interface BetRepository extends JpaRepository<Bet, Long> {
 
     Bet findBetById (Long id);
 
-    List<Bet> findAllByUserId (Long id);
+    List<Bet> findAllByUserIdOrderByCreatedDesc (Long id);
 
-    List<Bet> findAllByResult (String result);
+    List<Bet> findAllByResultOrderByCreatedDesc(String result);
 
-    List<Bet> findAllByUserIdAndResult (Long id, String result);
+    List<Bet> findAllByUserIdAndResultOrderByCreatedDesc (Long id, String result);
 
 }

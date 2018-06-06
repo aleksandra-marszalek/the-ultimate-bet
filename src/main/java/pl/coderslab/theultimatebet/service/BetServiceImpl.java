@@ -5,8 +5,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.coderslab.theultimatebet.entity.*;
 import pl.coderslab.theultimatebet.repository.BetRepository;
-import pl.coderslab.theultimatebet.repository.GameRepository;
-import pl.coderslab.theultimatebet.repository.WalletRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,7 +35,7 @@ public class BetServiceImpl implements BetService {
 
     @Override
     public List<Bet> findAllByUserId(Long id) {
-        return betRepository.findAllByUserId(id);
+        return betRepository.findAllByUserIdOrderByCreatedDesc(id);
     }
 
     @Override
@@ -47,7 +45,7 @@ public class BetServiceImpl implements BetService {
 
     @Override
     public List<Bet> findAllByUserIdAndResult (Long id, String result) {
-        return betRepository.findAllByUserIdAndResult(id, result);
+        return betRepository.findAllByUserIdAndResultOrderByCreatedDesc(id, result);
     }
 
     @Override
@@ -61,7 +59,7 @@ public class BetServiceImpl implements BetService {
 
     @Scheduled(fixedRate = 5000)
     public void updateBet() {
-        List<Bet> bets = betRepository.findAllByResult(null);
+        List<Bet> bets = betRepository.findAllByResultOrderByCreatedDesc(null);
         for (Bet bet: bets) {
             Game game = bet.getGame();
             Wallet wallet = bet.getUser().getWallet();
