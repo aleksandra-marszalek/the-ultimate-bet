@@ -18,6 +18,12 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Service class related to {@link Game}, containing most of the logic of the games.
+ * Have some standard crud methods, main scheduled method used to get the data from the external api and methods used in
+ * other services to find specific games.
+ */
 @Service
 public class GameServiceImpl implements GameService {
 
@@ -39,6 +45,11 @@ public class GameServiceImpl implements GameService {
 
     /////////// getting from API /////////////////
 
+    /**
+     * Scheduled for fixed rate method to get games from the external api.
+     * Then using {@link GameDto} class, there is new object for each new game created and automatically
+     * saved to DB. If game already exists in DB, the method updates all the data related to this game.
+     */
     @Scheduled(fixedRate = 1000*10)
     public void getGamesFromApi() {
         String url = "http://localhost:8090/game/";
