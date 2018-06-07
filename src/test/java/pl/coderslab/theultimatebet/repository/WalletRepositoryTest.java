@@ -27,17 +27,20 @@ public class WalletRepositoryTest {
 
         // given
         User user = new User();
-        user.setId(5L);
+//        user.setId(5L);
 
         Wallet wallet = new Wallet();
         wallet.setId(1L);
 
 
-        user.setWallet(wallet);
-
         entityManager.persist(user);
 
-        entityManager.persist(wallet);
+//        user.setWallet(wallet);
+
+//        entityManager.persist(user);
+
+
+//        entityManager.persist(wallet);
 
 
 

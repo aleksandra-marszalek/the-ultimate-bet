@@ -84,20 +84,7 @@ TeamController {
             favourite.setTeams(teams);
             favourite.setUser(user);
             favouriteService.save(favourite);
-            return "/";
-//            return "redirect:/user"+id+"/teams/favourites";
-//            User user = userService.findById(id);
-//            Wallet wallet = walletService.findWalletByUser(user);
-//            BigDecimal amountDecimal = BigDecimal.valueOf(amount);
-//            wallet.setBalance(wallet.getBalance().add(amountDecimal));
-//            walletService.save(wallet);
-//
-//            Operation operation = new Operation();
-//            operation.setCreated(LocalDateTime.now());
-//            operation.setAmount(amountDecimal);
-//            operation.setWallet(wallet);
-//            operation.setTitle("add money");
-//            operationService.save(operation);
+            return "redirect:/user/"+id+"/teams/favourites";
         }
         return "redirect:/user/"+id+"/teams/";
     }

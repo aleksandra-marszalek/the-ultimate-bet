@@ -29,6 +29,9 @@
                     <table class="table table-data2">
                         <tbody>
                         <tr>
+                            <a th:href="@{/user/{id}/teams/addToFavourite/{teamId}/(id=${id}, teamId=${team.id})}">Add to favourite</a>
+                        </tr>
+                        <tr>
                             <td>id</td>
                             <th><p th:text="${team.id}"></p></th>
                             <td></td>
