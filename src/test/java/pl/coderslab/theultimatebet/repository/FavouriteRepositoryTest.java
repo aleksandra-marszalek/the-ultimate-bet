@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.coderslab.theultimatebet.entity.Favourite;
 import pl.coderslab.theultimatebet.entity.User;
 import pl.coderslab.theultimatebet.entity.Wallet;
 
@@ -16,16 +17,16 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class WalletRepositoryTest {
+public class FavouriteRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private WalletRepository walletRepository;
+    private FavouriteRepository favouriteRepository;
 
     @Test
-    public void shouldFindWalletByUser() {
+    public void shouldFindFavouriteByUser() {
 
         // given
         User user = new User();
@@ -35,32 +36,28 @@ public class WalletRepositoryTest {
         user.setLastname("kowalski");
         user.setEmail("jan123@jan.pl");
 
-        Wallet wallet = new Wallet();
-        wallet.setBalance(BigDecimal.ONE);
-        wallet.setUser(user);
-
-
-
         entityManager.persist(user);
 
-        user.setWallet(wallet);
 
-//        entityManager.persist(user);
+        Favourite favourite = new Favourite();
+        favourite.setUser(user);
+
+        user.setFavourite(favourite);
 
 
-        entityManager.persist(wallet);
+        entityManager.persist(favourite);
 
 
 
         //when
 
-        Wallet actual = walletRepository.findWalletByUser(user);
+        Favourite actual = favouriteRepository.findFavouriteByUser(user);
 
 
 
         //then
         assertNotNull(actual);
-        assertEquals(wallet, actual);
+        assertEquals(favourite, actual);
         assertThat(actual.getId(), Matchers.greaterThan(0L));
 
 
@@ -79,6 +76,6 @@ public class WalletRepositoryTest {
 
         entityManager.persist(user);
 
-        assertNull(walletRepository.findWalletByUser(user));
+        assertNull(favouriteRepository.findFavouriteByUser(user));
     }
 }

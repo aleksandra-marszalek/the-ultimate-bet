@@ -74,7 +74,7 @@ public class GroupServiceImpl implements GroupService {
     ////////////// crud //////////////////
 
     @Override
-    public Group findById(Long id) {
+    public Group findByApiId(Long id) {
         return groupRepository.findGroupByApiId(id);
     }
 }

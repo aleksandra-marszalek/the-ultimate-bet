@@ -12,7 +12,7 @@ public class GroupConverter implements Converter<String, Group> {
 
         @Override
         public Group convert(String s) {
-            return groupService.findById(Long.parseLong(s));
+            return groupService.findByApiId(Long.parseLong(s));
         }
 
 }
