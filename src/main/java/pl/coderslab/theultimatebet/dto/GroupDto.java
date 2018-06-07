@@ -6,6 +6,9 @@ import pl.coderslab.theultimatebet.entity.Team;
 
 import java.util.List;
 
+/**
+ * Class used to convert the Object in JSON into {@link pl.coderslab.theultimatebet.entity.Group} objects.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GroupDto {
 
@@ -17,14 +20,6 @@ public class GroupDto {
 
         @JsonProperty("teams")
         private List<Team> teams;
-
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
 
     public Long getApiId() {

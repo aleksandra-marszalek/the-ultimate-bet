@@ -6,11 +6,13 @@ import pl.coderslab.theultimatebet.entity.User;
 import pl.coderslab.theultimatebet.entity.Wallet;
 import pl.coderslab.theultimatebet.repository.WalletRepository;
 
+/**
+ * Service responsible for logic related to {@link Wallet}. Contains method to find wallet by user
+ * and standard crud method to save user to DB.
+ */
 @Service
 public class WalletServiceImpl implements WalletService {
 
-    // TODO: sort by date
-    // TODO: withdrawal possibility
 
     @Autowired
     WalletRepository walletRepository;

@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class used to convert the Json objects into {@link pl.coderslab.theultimatebet.entity.Game} objects.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameDto {
 

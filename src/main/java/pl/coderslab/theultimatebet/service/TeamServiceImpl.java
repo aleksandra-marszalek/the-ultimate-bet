@@ -13,7 +13,8 @@ import pl.coderslab.theultimatebet.repository.TeamRepository;
 import java.util.List;
 
 /**
- * Service
+ * Service related to the {@link Team} logic. Has main scheduled method for getting the teams from external api and some
+ * useful methods to find {@link Team} or lists of team by different arguments.
  */
 @Service
 public class TeamServiceImpl implements TeamService {
@@ -26,6 +27,10 @@ public class TeamServiceImpl implements TeamService {
 
     ///////// from api /////////////
 
+    /**
+     * Scheduled method which at fixed rate gets from external api all the teams in Json and then using {@link TeamDto} creates
+     * new objects of {@link Team} and saves them in the DB or if they are already present in DB, updates them.
+     */
     @Scheduled(fixedRate = 1000*10)
     public void getTeamsFromApi() {
         String url = "http://localhost:8090/team/";

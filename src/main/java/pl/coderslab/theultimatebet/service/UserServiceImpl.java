@@ -12,8 +12,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ *  Service responsible for main logic related to {@link User}. Has standard crud methods and multiple methods
+ *  to find the user using different arguments.
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -35,6 +41,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUserByEmail(email);
     }
 
+    /**
+     * Method to save {@link User} argument into the DB - used for adding new user.
+     * Before saving, methods uses setters to add to user role "user", wallet with balance = 0, empty favourite list.
+     * @param user
+     */
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -56,6 +67,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Method used to check if user with the email given is already in the DB.
+     * @param user
+     * @return boolean true if the user with this email is already in the DB.
+     */
     @Override
     public boolean checkEmail(User user) {
         String email = user.getEmail();
@@ -63,6 +79,11 @@ public class UserServiceImpl implements UserService {
         return userEx != null;
     }
 
+    /**
+     * Method used to check if user with the username given is already in the DB.
+     * @param user
+     * @return boolean true if the user with this username is already in the DB.
+     */
     @Override
     public boolean checkUsername (User user) {
         String username = user.getUsername();

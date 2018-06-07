@@ -8,6 +8,9 @@ import pl.coderslab.theultimatebet.entity.Team;
 
 import java.util.List;
 
+/**
+ * Class used to convert the JSON objects into {@link Team} objects.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TeamDto {
 
