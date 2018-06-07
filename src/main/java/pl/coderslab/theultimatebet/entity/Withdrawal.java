@@ -3,6 +3,9 @@ package pl.coderslab.theultimatebet.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+/**
+ * Entity closely related to {@link Wallet}, keeping the info about amount withdrawn from the wallet.
+ */
 @Entity
 public class Withdrawal {
 

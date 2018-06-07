@@ -5,12 +5,18 @@ import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * {@link Entity} responsible for keeping all the information about a single bet.
+ * Related to {@link User} - which places the bet, {@link Game} which result is what we bet for,
+ * {@link Team} which is chosen to win, plus values in BigDecimal like amount placed in the bet,
+ * course for the win of the team chosen (kept in {@link Game}, total amount possible to win / won,
+ * LocalDateTime of the creation of the bet and result (String "won" or "lose", null if the game has not
+ * been played yet).
+ *  TODO: basket for Bets, using HttpSession
+ *  TODO: betting on team - winner of the tournament, other positions, position in group etc.
+ */
 @Entity
 public class Bet {
-
-
-    // TODO: basket for Bets, using HttpSession
-    // TODO: betting on team - winner of the tournament, other positions
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

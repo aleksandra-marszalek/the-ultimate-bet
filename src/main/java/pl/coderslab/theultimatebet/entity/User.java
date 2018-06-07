@@ -1,22 +1,22 @@
 package pl.coderslab.theultimatebet.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.theultimatebet.validationGroups.ValidationUser;
-import pl.coderslab.theultimatebet.validator.UniqueName;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
-import java.time.LocalDate;
 import java.util.Set;
 
+
+/**
+ * One of the most important entities in the app. Keeps the info about the user. Has String attributes username,
+ * firstname, lastname, email, password and boolean isAdult - must be true to enable saving to DB.
+ * Also related to {@link Wallet} - each user has their waller, {@link Favourite} to mark their favourite {@link Team},
+ * {@link Role} - to provide the user different authorities for different roles (TODO).
+ */
 @Entity(name = "users")
 public class User {
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

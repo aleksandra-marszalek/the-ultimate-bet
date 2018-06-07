@@ -6,6 +6,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Simple entity keeping the info about wallet - most of all - balance of the wallet;
+ * also strictly related to {@link User}, {@link Operation}, {@link Withdrawal}.
+ */
 @Entity
 public class Wallet {
 

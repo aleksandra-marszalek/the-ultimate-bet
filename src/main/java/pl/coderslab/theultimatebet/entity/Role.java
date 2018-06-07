@@ -2,6 +2,11 @@ package pl.coderslab.theultimatebet.entity;
 
 import javax.persistence.*;
 
+/**
+ * Simple entity related to {@link User}. Normally should be used to give different authorities to the users.
+ * As for now, in this app there is only possibility to add regular user, but in the future for sure should be at least
+ * an admin / moderator, too.
+ */
 @Entity
 @Table(name = "role")
 public class Role {

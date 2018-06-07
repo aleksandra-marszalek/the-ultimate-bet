@@ -4,6 +4,12 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Entity to keep all the info about the operations, for example adding money, withdraw money from the wallet,
+ * placing the bet etc.
+ * When something like those happens, a specific title is used and the amount of the operation, date is automatically
+ * created and {@link Wallet} is related to complete the operation.
+ */
 @Entity
 public class Operation {
 

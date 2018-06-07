@@ -3,6 +3,14 @@ package pl.coderslab.theultimatebet.entity;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * One of the most important entities - keeps all the info about the team.
+ * Related to {@link Game}, has also info about name, seeding, strength, number of won matches, lost matches, point
+ * balance, final Standings (only available after the tournament ends) and some helpful signature.
+ * Also related to {@link Group}(important at a group stage to arrange the matches).
+ * Implements the Comparable, in order to sort the groups right (in the api, but who knows..).
+ * All data taken from the external api.
+ */
 @Entity
 public class Team implements Comparable<Team>{
 

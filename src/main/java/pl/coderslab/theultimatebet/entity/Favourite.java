@@ -3,6 +3,9 @@ package pl.coderslab.theultimatebet.entity;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ *Simple entity directly related to {@link User}, which enables the {@link User} keeping the information about their favourite {@link Team}.
+ */
 @Entity
 public class Favourite {
 

@@ -3,6 +3,15 @@ package pl.coderslab.theultimatebet.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Entity keeping one of the most important information for the application.
+ * Represent a simple match of ultimate frisbee.
+ * Is related to {@link Team} as team1 and team2, points each Team got, odds for each team - related to the team strength
+ * and probabality of win, course for team - which depends on odds and the markup of the bookie, gametime, status
+ * (0 for scheduled games and 1 for finished games - maybe in the future to add live games).
+ * Plus signature as a help-attribute to find out who wins and who loses which game.
+ * All info taken from the external api.
+ */
 @Entity
 public class Game {
 
