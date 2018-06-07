@@ -6,6 +6,10 @@ import pl.coderslab.theultimatebet.entity.Favourite;
 import pl.coderslab.theultimatebet.entity.User;
 import pl.coderslab.theultimatebet.repository.FavouriteRepository;
 
+/**
+ * Simple service responsible for all the logic related to {@link Favourite}.
+ * Has crud method to save favourite and find one by the {@link User}.
+ */
 @Service
 public class FavouriteServiceImpl implements FavouriteService {
 

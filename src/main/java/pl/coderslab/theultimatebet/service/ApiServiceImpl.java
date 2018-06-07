@@ -15,6 +15,14 @@ import pl.coderslab.theultimatebet.repository.TeamRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service used for providing the data from the DB to the external sources in JSON format.
+ * All the data is transferred by the {@link pl.coderslab.theultimatebet.web.ApiController}.
+ * For now there is no api key so all the data is accessible.
+ * Service provides endpoints for teams, groups, all games, scheduled games and finished games.
+ */
+
+
 @Service
 public class ApiServiceImpl implements ApiService {
 

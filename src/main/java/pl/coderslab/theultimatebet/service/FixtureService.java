@@ -5,12 +5,20 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.theultimatebet.entity.Role;
 import pl.coderslab.theultimatebet.repository.RoleRepository;
 
+
+/**
+ * Service providing one method used in {@link  org.springframework.context.ConfigurableApplicationContext}
+ * in {@link pl.coderslab.theultimatebet.TheUltimateBetApplication} class as the Application starts.
+ */
 @Service
 public class FixtureService {
 
     @Autowired
     RoleRepository roleRepository;
 
+    /**
+     * Method used to create specific roles and add them to DB.
+     */
     public void createRoles() {
         Role role = new Role();
         role.setName("user");

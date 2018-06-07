@@ -9,7 +9,10 @@ import pl.coderslab.theultimatebet.repository.BetRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+/**
+ * Service class responsible for the logic related to {@link Bet}.
+ * Consists of standard crud methods, specific searching methods and one scheduled method to update the bet results every 5000ms.
+ */
 @Service
 public class BetServiceImpl implements BetService {
 
@@ -57,6 +60,15 @@ public class BetServiceImpl implements BetService {
 
     ///////////// scheduled /////////////
 
+    /**
+     * Scheduled method to verify the results of the {@link Bet}.
+     * On fixed rate connects to DB and checks if there are any new bets. For each bet without a result
+     * checks if the game they are related to is over.
+     * If the game game is over, verifies the result and give the bet status "won" or "lost".
+     * If bet is won, there is new operation added to the DB and to the wallet is being transferred the amount won.
+     * If bet is lost, there is no operation, but the status is set.
+     * In both cases the status makes the bets inactive.
+     */
     @Scheduled(fixedRate = 5000)
     public void updateBet() {
         List<Bet> bets = betRepository.findAllByResultOrderByCreatedDesc(null);
