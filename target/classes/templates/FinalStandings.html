@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<!-- WELCOME-->
+<section class="welcome p-t-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-4">
+                    All teams
+                </h1>
+                <hr class="line-seprate">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END WELCOME-->
+
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35"> Teams ordered by seeding</h3>
+                <div class="table-responsive table-responsive-data2">
+                    <div class="alert alert-dark" role="alert">
+                        <p th:text="${info}"></p>
+                    </div>
+                    <table class="table table-data2">
+                        <thead>
+                        <tr>
+                            <th>final standing</th>
+                            <th>name</th>
+                            <th>strength</th>
+                            <th>seeding</th>
+                            <th>won</th>
+                            <th>lost</th>
+                            <th>point balance</th>
+                            <th>more...</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr-shadow" th:each="team: ${allTeams}">
+                            <td><p th:text="${team.finalStanding}"></p></td>
+                            <td><p th:text="${team.name}"></p></td>
+                            <td><p th:text="${team.strength}"></p></td>
+                            <td><p th:text="${team.seeding}"></p></td>
+                            <td><p th:text="${team.won}"></p></td>
+                            <td><p th:text="${team.lost}"></p></td>
+                            <td><p th:text="${team.pointBalance}"></p></td>
+                            <td>
+                                <a th:href="@{/user/{id}/teams/{teamId}/(id=${id}, teamId=${team.id})}">Team card</a>
+                                <a th:href="@{/user/{id}/teams/addToFavourite/{teamId}/(id=${id}, teamId=${team.id})}">Add to favourite</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+
+
+
+<div th:replace="Footer.html :: footer"></div>

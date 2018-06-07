@@ -64,10 +64,10 @@ public class TeamServiceImpl implements TeamService {
 
 
 
-////    @Override
-//    public List<Team> findAllOrderByStandings() {
-//        return teamRepository.findAllOrderByFinalStanding();
-//    }
+//    @Override
+    public List<Team> findAllOrderByStandings() {
+        return teamRepository.findAllOrderByFinalStanding();
+    }
 
     @Override
     public List<Team> findAllOrderBySeeding() {

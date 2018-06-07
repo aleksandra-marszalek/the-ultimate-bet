@@ -10,7 +10,7 @@ public interface TeamService {
 
     public Team findById (Long id);
 
-//    public List<Team> findAllOrderByStandings ();
+    public List<Team> findAllOrderByStandings();
 
    public List<Team> findAllOrderBySeeding ();
 }

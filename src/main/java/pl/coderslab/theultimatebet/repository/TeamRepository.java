@@ -12,7 +12,8 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
 
     Team findTeamById (Long id);
 
-//    List<Team> findAllOrderByFinalStanding ();
+    @Query(value ="select t from Team t ORDER BY t.finalStanding")
+    List<Team> findAllOrderByFinalStanding ();
 
     @Query(value ="select t from Team t ORDER BY t.seeding")
     List<Team> findAllOrderBySeeding ();

@@ -19,7 +19,7 @@ import java.util.List;
 public class
 TeamController {
 
-    // TODO: add teams, current standings, possibility to bet on champion
+    // TODO: add current standings, (groups and quarterfinals, semifinals standings), possibility to bet on champion
 
     @Autowired
     TeamService teamService;
@@ -41,6 +41,25 @@ TeamController {
             } else {
                 return "redirect:/";
             }
+    }
+
+    @GetMapping("/{id}/teams/finalStandings")
+    public String finalStandings(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getUser().getId()==id) {
+            model.addAttribute("currentUser", currentUser);
+            model.addAttribute("id", id);
+            List<Team> allTeams = teamService.findAllOrderByStandings();
+            model.addAttribute("allTeams", allTeams);
+            if (allTeams.get(0).getFinalStanding()==0) {
+                model.addAttribute("info", "the finals has not been played yet");
+            } else {
+                model.addAttribute("info", "the final standings are here");
+            }
+
+            return "FinalStandings";
+        } else {
+            return "redirect:/";
+        }
     }
 
         @GetMapping("/{id}/teams/{teamId}")
