@@ -11,6 +11,10 @@ import pl.coderslab.theultimatebet.repository.GroupRepository;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Service class related to {@link Group}, containing most of the logic of the groups.
+ * Has method to find group by api id nad main scheduled method used to get the data from the external api.
+ */
 @Service
 public class GroupServiceImpl implements GroupService {
 
@@ -21,6 +25,12 @@ public class GroupServiceImpl implements GroupService {
 
     ////////////// getting data from api /////////////////
 
+
+    /**
+     * Scheduled for fixed rate method to get groups from the external api.
+     * Then using {@link GroupDto} class, there is new object for each new group created and automatically
+     * saved to DB. If group already exists in DB, the method updates all the data related to this game.
+     */
     @Scheduled(fixedRate = 1000*60*60*24)
     public void getGroupsFromApi() {
         String url = "http://localhost:8090/group/";
@@ -39,37 +49,6 @@ public class GroupServiceImpl implements GroupService {
         }
     }
 
-//    @Scheduled(fixedRate = 1000*60*60*24)
-//    public void assignTeamsToGroupFromApi() {
-//
-//        //get all groups from db
-//
-//        //iterate over groups
-//
-//            //foreach get from api teams
-//
-//            //check if all teams in db
-//
-//            //assign teams to group
-//
-//            //update in db group
-//
-//
-//        String url = "http://localhost:8090/group/";
-//        RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<GroupDto[]> responseGroups = restTemplate.getForEntity(url, GroupDto[].class);
-//        GroupDto[] groups = responseGroups.getBody();
-//        for (GroupDto group: groups) {
-//            Group g = new Group();
-//            if (groupRepository.findGroupById(group.getId()) != null) {
-//                g = groupRepository.findGroupById(group.getId());
-//            }
-//            g.setId(group.getId());
-//            g.setName(group.getName());
-//            groupRepository.save(g);
-//
-//        }
-//    }
 
     ////////////// crud //////////////////
 

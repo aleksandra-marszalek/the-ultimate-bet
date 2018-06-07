@@ -14,6 +14,9 @@ import pl.coderslab.theultimatebet.entity.User;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Service implementing UserDetailsService, enabling using {@link org.springframework.security.core.annotation.AuthenticationPrincipal}
+ */
 public class SpringDataUserDetailsService implements UserDetailsService {
     private UserService userService;
     @Autowired

@@ -99,6 +99,14 @@ public class GameServiceImpl implements GameService {
 
     /////////// other ///////////////
 
+    /**
+     * The method aim is to convert and round up a double value to BigDecimal.
+     * (The odds from external api are send as double, and the course is preffered to be in BigDecimal)
+     * @param value is a double
+     * @param places is how many decimal places are to be round up to
+     * @return the rounded value in BigDecimal
+     */
+
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
@@ -106,6 +114,14 @@ public class GameServiceImpl implements GameService {
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
+    /**
+     * Method used to find all future games of the teams which are marked as favourite by the {@param user}
+     * uses favourite repository method to find all favourite teams. Then for each team finds all the games
+     * in which the team is present. Then checks the status - if game is not played yet, adds it to the returned game list.
+     * @param user
+     * @return the list of future games of team marked as favourite by the user
+     */
 
     @Override
     public List<Game> findGamesByUserFavourite (User user) {
@@ -130,13 +146,19 @@ public class GameServiceImpl implements GameService {
         return games;
     }
 
+
+    /**
+     * Method used to find the games in which there is a big possibility of win by the user.
+     * As the courses of teams are based by almost the inverse of the probability to win, the smaller the course is,
+     * the bigger the possibility to win is. - TODO: improve the algorithm, so that be more exact
+     */
     @Override
     public List<Game> findSuggestedGames () {
         List<Game> scheduledGames = findAllByStatus(0);
         List<Game> suggestedGames = new ArrayList<>();
 
         for (Game g: scheduledGames) {
-            if (g.getCourseForTeam1()<1.5 || g.getCourseForTeam2()<1.5) {
+            if (g.getCourseForTeam1()<1.6 || g.getCourseForTeam2()<1.6) {
                 suggestedGames.add(g);
             }
         }

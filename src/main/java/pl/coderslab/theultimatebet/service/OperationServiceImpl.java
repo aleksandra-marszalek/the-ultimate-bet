@@ -8,6 +8,9 @@ import pl.coderslab.theultimatebet.repository.OperationRepository;
 
 import java.util.List;
 
+/**
+ * Service class containing mainly the methods to manage the operations.
+ */
 @Service
 public class OperationServiceImpl implements OperationService {
 
@@ -25,6 +28,11 @@ public class OperationServiceImpl implements OperationService {
         return operationRepository.findAll();
     }
 
+    /**
+     * Method used to find the last 10 operations in the wallet.
+     * @param wallet is {@link Wallet}
+     * @return last 10 operations in wallet, ordered by created, desc
+     */
     @Override
     public List<Operation> findAllByWalletLast(Wallet wallet) {
         List<Operation> last10 = operationRepository.findAllByWalletOrderByCreatedDesc(wallet);

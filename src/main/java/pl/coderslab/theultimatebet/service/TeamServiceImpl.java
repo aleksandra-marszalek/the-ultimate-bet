@@ -12,6 +12,9 @@ import pl.coderslab.theultimatebet.repository.TeamRepository;
 
 import java.util.List;
 
+/**
+ * Service
+ */
 @Service
 public class TeamServiceImpl implements TeamService {
 
@@ -64,7 +67,7 @@ public class TeamServiceImpl implements TeamService {
 
 
 
-//    @Override
+    @Override
     public List<Team> findAllOrderByStandings() {
         return teamRepository.findAllOrderByFinalStanding();
     }
