@@ -7,8 +7,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="title-4">Welcome back
-                    <span th:text="${currentUser.username}">
+                <h1 class="title-4">Welcome back,
+                    <span th:text="${currentUser.username}">!
                     </span>
                 </h1>
                 <hr class="line-seprate">
@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-info" role="alert">
+                <div class="alert alert-warning" role="alert">
                     Don't miss it!
                 </div>
                 <h3 class="title-5 m-b-35">Scheduled games of your fav teams</h3>
@@ -55,103 +55,43 @@
     </div>
 </section>
 
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    Try your luck - our tip: if stakes are small, the win might be smaller, but the probability to win is bigger!
+                </div>
+                <h3 class="title-5 m-b-35">Suggested games</h3>
+                <div class="table-responsive table-responsive-data2">
+                    <p th:text="${info2}"></p>
+                    <table class="table table-data2">
+                        <thead>
+                        <tr>
+                            <th>game date & time</th>
+                            <th>stake</th>
+                            <th>teams</th>
+                            <th>stake</th>
+                            <th>place a bet!</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr-shadow" th:each="game: ${suggested}">
+                            <td><p th:text="${game.gameTime}"></p></td>
+                            <td><p th:text="${game.courseForTeam1}"></p></td>
+                            <td><p th:text="|${game.team1.name} vs ${game.team2.name}|"></p></td>
+                            <td><p th:text="${game.courseForTeam2}"></p></td>
+                            <td><a th:href="@{/user/{id}/bets/{gameId}/addBet(id=${id}, gameId=${game.id})}">Place a bet</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!--&lt;!&ndash; DATA TABLE&ndash;&gt;-->
-<!--<section class="p-t-20">-->
-    <!--<div class="container">-->
-        <!--<div class="row">-->
-            <!--<div class="col-md-12">-->
-                <!--<h3 class="title-5 m-b-35">CLOSEST GAMES // FINISHED GAMES</h3>-->
-                <!--<div class="table-data__tool">-->
-                    <!--<div class="table-data__tool-left">-->
-                        <!--<div class="rs-select2&#45;&#45;light rs-select2&#45;&#45;md">-->
-                            <!--<select class="js-select2" name="property">-->
-                                <!--<option selected="selected">All Properties</option>-->
-                                <!--<option value="">Option 1</option>-->
-                                <!--<option value="">Option 2</option>-->
-                            <!--</select>-->
-                            <!--<div class="dropDownSelect2"></div>-->
-                        <!--</div>-->
-                        <!--<div class="rs-select2&#45;&#45;light rs-select2&#45;&#45;sm">-->
-                            <!--<select class="js-select2" name="time">-->
-                                <!--<option selected="selected">Today</option>-->
-                                <!--<option value="">3 Days</option>-->
-                                <!--<option value="">1 Week</option>-->
-                            <!--</select>-->
-                            <!--<div class="dropDownSelect2"></div>-->
-                        <!--</div>-->
-                        <!--<button class="au-btn-filter">-->
-                            <!--<i class="zmdi zmdi-filter-list"></i>filters</button>-->
-                    <!--</div>-->
-                    <!--<div class="table-data__tool-right">-->
-                        <!--<button class="au-btn au-btn-icon au-btn&#45;&#45;green au-btn&#45;&#45;small">-->
-                            <!--<i class="zmdi zmdi-plus"></i>add item</button>-->
-                        <!--<div class="rs-select2&#45;&#45;dark rs-select2&#45;&#45;sm rs-select2&#45;&#45;dark2">-->
-                            <!--<select class="js-select2" name="type">-->
-                                <!--<option selected="selected">Export</option>-->
-                                <!--<option value="">Option 1</option>-->
-                                <!--<option value="">Option 2</option>-->
-                            <!--</select>-->
-                            <!--<div class="dropDownSelect2"></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="table-responsive table-responsive-data2">-->
-                    <!--<table class="table table-data2">-->
-                        <!--<thead>-->
-                        <!--<tr>-->
-                            <!--<th>name</th>-->
-                            <!--<th>email</th>-->
-                            <!--<th>description</th>-->
-                            <!--<th>date</th>-->
-                            <!--<th>status</th>-->
-                            <!--<th>price</th>-->
-                            <!--<th></th>-->
-                        <!--</tr>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                        <!--<tr class="tr-shadow">-->
-                            <!--<td>-->
-                                <!--<label class="au-checkbox">-->
-                                    <!--<input type="checkbox">-->
-                                    <!--<span class="au-checkmark"></span>-->
-                                <!--</label>-->
-                            <!--</td>-->
-                            <!--<td>Lori Lynch</td>-->
-                            <!--<td>-->
-                                <!--<span class="block-email">lori@example.com</span>-->
-                            <!--</td>-->
-                            <!--<td class="desc">Samsung S8 Black</td>-->
-                            <!--<td>2018-09-27 02:12</td>-->
-                            <!--<td>-->
-                                <!--<span class="status&#45;&#45;process">Processed</span>-->
-                            <!--</td>-->
-                            <!--<td>$679.00</td>-->
-                            <!--<td>-->
-                                <!--<div class="table-data-feature">-->
-                                    <!--<button class="item" data-toggle="tooltip" data-placement="top" title="Send">-->
-                                        <!--<i class="zmdi zmdi-mail-send"></i>-->
-                                    <!--</button>-->
-                                    <!--<button class="item" data-toggle="tooltip" data-placement="top" title="Edit">-->
-                                        <!--<i class="zmdi zmdi-edit"></i>-->
-                                    <!--</button>-->
-                                    <!--<button class="item" data-toggle="tooltip" data-placement="top" title="Delete">-->
-                                        <!--<i class="zmdi zmdi-delete"></i>-->
-                                    <!--</button>-->
-                                    <!--<button class="item" data-toggle="tooltip" data-placement="top" title="More">-->
-                                        <!--<i class="zmdi zmdi-more"></i>-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--</tbody>-->
-                    <!--</table>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</section>-->
-<!--&lt;!&ndash; END DATA TABLE&ndash;&gt;-->
 
 
 <div th:replace="Footer.html :: footer"></div>

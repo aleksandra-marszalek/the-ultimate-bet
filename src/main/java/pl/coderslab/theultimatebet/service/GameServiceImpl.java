@@ -118,4 +118,17 @@ public class GameServiceImpl implements GameService {
         }
         return games;
     }
+
+    @Override
+    public List<Game> findSuggestedGames () {
+        List<Game> scheduledGames = findAllByStatus(0);
+        List<Game> suggestedGames = new ArrayList<>();
+
+        for (Game g: scheduledGames) {
+            if (g.getCourseForTeam1()<1.5 || g.getCourseForTeam2()<1.5) {
+                suggestedGames.add(g);
+            }
+        }
+        return suggestedGames;
+    }
 }

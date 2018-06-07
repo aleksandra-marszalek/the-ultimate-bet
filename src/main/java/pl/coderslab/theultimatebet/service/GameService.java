@@ -16,4 +16,5 @@ public interface GameService {
 
     public List<Game> findGamesByUserFavourite (User user);
 
+    public List<Game> findSuggestedGames ();
 }
