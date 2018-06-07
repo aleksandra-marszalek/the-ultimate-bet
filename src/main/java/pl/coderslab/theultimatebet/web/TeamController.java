@@ -109,11 +109,12 @@ TeamController {
     }
 
     @GetMapping("/{id}/teams/favourites")
-    public String allFavouritesTeams(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser.getUser().getId()==id) {
+    public String allFavouritesTeams(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser logedUser) {
+        User currentUser = userService.findById(logedUser.getUser().getId());
+        if (currentUser.getId()==id) {
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("id", id);
-            model.addAttribute("allTeams", favouriteService.findFavouriteByUser(currentUser.getUser()).getTeams());
+            model.addAttribute("allTeams", favouriteService.findFavouriteByUser(currentUser).getTeams());
             return "FavouriteTeams";
         } else {
             return "redirect:/";

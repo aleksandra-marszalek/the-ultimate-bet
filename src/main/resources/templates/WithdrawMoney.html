@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<!-- WELCOME-->
+<section class="welcome p-t-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-4">
+                    Withdraw money
+                </h1>
+                <hr class="line-seprate">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <strong>Withdraw money</strong>
+        </div>
+        <div class="card-body card-block">
+            <form th:action="@{/user/{id}/wallet/withdrawMoney(id=${id})}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="control-label mb-1">Amount</label>
+                        <input id="cc-pament" th:name="cc-payment"  th:field="*{withdrawal.amount}"
+                               th:type="number" class="form-control" aria-required="true" aria-invalid="false" value="50.00">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="Footer.html :: footer"></div>

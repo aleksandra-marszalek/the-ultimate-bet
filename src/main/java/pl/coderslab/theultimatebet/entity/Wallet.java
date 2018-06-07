@@ -22,6 +22,9 @@ public class Wallet {
     @OneToMany(mappedBy = "wallet")
     private List<Operation> operations;
 
+    @OneToMany(mappedBy = "wallet")
+    private List<Withdrawal> withdrawal;
+
     public Wallet() {
     }
 
@@ -55,5 +58,13 @@ public class Wallet {
 
     public void setOperations(List<Operation> operations) {
         this.operations = operations;
+    }
+
+    public List<Withdrawal> getWithdrawal() {
+        return withdrawal;
+    }
+
+    public void setWithdrawal(List<Withdrawal> withdrawal) {
+        this.withdrawal = withdrawal;
     }
 }

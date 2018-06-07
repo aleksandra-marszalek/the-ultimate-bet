@@ -10,6 +10,7 @@ public class Bet {
 
 
     // TODO: basket for Bets, using HttpSession
+    // TODO: betting on team - winner of the tournament, other positions
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

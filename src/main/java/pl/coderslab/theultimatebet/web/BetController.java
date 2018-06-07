@@ -166,11 +166,16 @@ public class BetController {
         @PostMapping("/{id}/bets/{gameId}/addBet")
         public String addBet(@Valid @ModelAttribute Bet bet, BindingResult result,
                              @PathVariable Long id, @PathVariable Long gameId, Model model,
-                             @AuthenticationPrincipal CurrentUser currentUser) {
+                             @AuthenticationPrincipal CurrentUser logedUser) {
+
+            User currentUser = userService.findById(logedUser.getUser().getId());
+
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("id", id);
             model.addAttribute("bet", bet);
             model.addAttribute("gameId", gameId);
+
+
             if (result.hasErrors()) {
                 return "addBet";
             }
@@ -183,7 +188,7 @@ public class BetController {
                 model.addAttribute("info3", "Bet value must be bigger than 0! Try again with another amount!");
                 return "error";
             }
-            if (currentUser.getUser().getWallet().getBalance().compareTo(bet.getAmount())==-1) {
+            if (currentUser.getWallet().getBalance().compareTo(bet.getAmount())==-1) {
                 model.addAttribute("info2", "You don't have enough money. " +
                         "Go back to bet to select another amount or add some money to your account ASAP not to miss the opportunity to bet!");
                 return "error";
@@ -193,12 +198,12 @@ public class BetController {
             } else {
                 bet.setCourse(BigDecimal.valueOf(gameService.findById(gameId).getCourseForTeam2()));
             }
-            bet.setUser(currentUser.getUser());
+            bet.setUser(currentUser);
             bet.setGame(gameService.findById(gameId));
             bet.setCreated(LocalDateTime.now());
             bet.setTotalAmount(bet.getAmount().multiply(bet.getCourse()));
             betService.save(bet);
-            Wallet wallet = walletService.findWalletByUser(currentUser.getUser());
+            Wallet wallet = walletService.findWalletByUser(currentUser);
             wallet.setBalance(wallet.getBalance().subtract(bet.getAmount()));
             Operation operation = new Operation();
             operation.setTitle("placed a bet");

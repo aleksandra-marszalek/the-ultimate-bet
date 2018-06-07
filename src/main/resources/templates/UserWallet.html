@@ -30,9 +30,13 @@
                         <tbody>
                         <tr class="tr-shadow">
                             <td><p th:text="${wallet.balance}"></p></td>
+                            <td><a th:href="@{/user/{id}/wallet/withdrawMoney(id=${id})}">
+                                <button type="button" class="btn btn-outline-danger">Withdraw money</button>
+                            </a></td>
                         </tr>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

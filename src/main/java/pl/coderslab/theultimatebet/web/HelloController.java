@@ -40,7 +40,7 @@ public class HelloController {
                 model.addAttribute("id", id);
                 List<Game> games = gameService.findGamesByUserFavourite(currentUser.getUser());
                 if (games.size()==0) {
-                    model.addAttribute("info", "you have no favourite teams! Add some and you will never miss the game again!");
+                    model.addAttribute("info", "You have no favourite teams or your teams don't have any planned games :(");
                 }
                 model.addAttribute("games", games);
                 return "homeLogged";
