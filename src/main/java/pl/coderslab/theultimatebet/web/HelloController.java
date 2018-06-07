@@ -39,6 +39,9 @@ public class HelloController {
                 model.addAttribute("currentUser", currentUser);
                 model.addAttribute("id", id);
                 List<Game> games = gameService.findGamesByUserFavourite(currentUser.getUser());
+                if (games.size()==0) {
+                    model.addAttribute("info", "you have no favourite teams! Add some and you will never miss the game again!");
+                }
                 model.addAttribute("games", games);
                 return "homeLogged";
             }
