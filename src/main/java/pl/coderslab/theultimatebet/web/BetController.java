@@ -197,6 +197,9 @@ public class BetController {
                 List<Team> teams = new ArrayList<>();
                 teams.add(game.getTeam1());
                 teams.add(game.getTeam2());
+                User user = userService.findById(id);
+                Wallet wallet = user.getWallet();
+                model.addAttribute("wallet", wallet);
                 model.addAttribute("teams", teams);
                 model.addAttribute("game", game);
                 Bet bet = new Bet();
