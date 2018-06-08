@@ -17,6 +17,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Controller responsible for providing all the data related to {@link Wallet} and connecting the services with the views.
+ */
 @Controller
 @RequestMapping("/user")
 public class userAccountController {
@@ -36,16 +39,16 @@ public class userAccountController {
     @Autowired
     WithdrawalService withdrawalService;
 
-    @GetMapping("/{id}")
-    public String userAccount (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        if (currentUser.getUser().getId() == id) {
-            model.addAttribute("id", id);
-            return "UserAccount";
-        } else {
-            return "redirect:/";
-        }
-
-    }
+//    @GetMapping("/{id}")
+//    public String userAccount (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+//        if (currentUser.getUser().getId() == id) {
+//            model.addAttribute("id", id);
+//            return "UserAccount";
+//        } else {
+//            return "redirect:/";
+//        }
+//
+//    }
 
     @GetMapping("/{id}/wallet")
     public String showWallet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {

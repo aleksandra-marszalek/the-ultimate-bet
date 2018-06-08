@@ -12,12 +12,20 @@ import pl.coderslab.theultimatebet.entity.User;
 import pl.coderslab.theultimatebet.service.UserService;
 import pl.coderslab.theultimatebet.validationGroups.ValidationUser;
 
+/**
+ * Controller responsible for providing all the data related to {@link User} and connecting the services with the views.
+ */
 @Controller
 public class userController {
 
     @Autowired
     UserService userService;
 
+    /**
+     * GET for adding a new {@link User}
+     * @param model to provide the new User to form
+     * @return the form of registration
+     */
     @GetMapping("/newUser")
     public String newUser(Model model) {
         User user = new User();
@@ -25,6 +33,13 @@ public class userController {
         return "registration";
     }
 
+    /**
+     * POST for adding a new {@link User}
+     * @param user which keeps all the crucial data of {@link User}
+     * @param result BindingResult
+     * @param model to provide the to form if errors
+     * @return registration if errors and redirect to home if user successfully added to Db
+     */
     @PostMapping("/newUser")
     public String newUser(@Validated({ValidationUser.class}) @ModelAttribute User user, BindingResult result, Model model) {
             if (result.hasErrors()) {
