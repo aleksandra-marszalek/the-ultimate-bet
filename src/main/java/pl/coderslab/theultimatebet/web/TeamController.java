@@ -13,7 +13,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Controller responsible for providing all the data related to {@link Team} and connecting the services with the views.
+ */
 @Controller
 @RequestMapping("/user")
 public class
@@ -30,7 +32,13 @@ TeamController {
     @Autowired
     UserService userService;
 
-
+    /**
+     * GET for showing all the {@link Team} ordered by seeding
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view with all the teams, ordered by seeding.
+     */
     @GetMapping("/{id}/teams")
         public String allTeams(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
             if (currentUser.getUser().getId()==id) {
@@ -43,6 +51,14 @@ TeamController {
             }
     }
 
+    /**
+     * GET for showing all the {@link Team} ordered by final standings
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view with all the teams, ordered by final standings - if the finals has not been played,
+     * they are ordered by the id and the right info is displayed
+     */
     @GetMapping("/{id}/teams/finalStandings")
     public String finalStandings(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         if (currentUser.getUser().getId()==id) {
@@ -62,6 +78,14 @@ TeamController {
         }
     }
 
+    /**
+     * GET for showing the specific {@link Team}
+     * @param teamId id of the {@link Team}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view with the specific team
+     **/
         @GetMapping("/{id}/teams/{teamId}")
         public String singleTeam(@PathVariable Long id, @PathVariable Long teamId,
                                  @AuthenticationPrincipal CurrentUser currentUser, Model model) {
@@ -79,6 +103,14 @@ TeamController {
             }
         }
 
+    /**
+     * GET for adding the specific {@link Team} to {@link Favourite}
+     * @param teamId id of the {@link Team}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view with the confirmation of the adding the team to favourite
+     **/
     @GetMapping("/{id}/teams/addToFavourite/{teamId}/")
     public String addToFavourite (@PathVariable Long id, @PathVariable Long teamId,
                              @AuthenticationPrincipal CurrentUser currentUser, Model model) {
@@ -92,6 +124,14 @@ TeamController {
         }
     }
 
+    /**
+     * POST for adding the specific {@link Team} to {@link Favourite}
+     * @param teamId id of the {@link Team}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param agree to confirm adding to favourite
+     * @return {@link Favourite} list if add works and to teams if doesn't
+     */
     @PostMapping("/{id}/teams/addToFavourite/{teamId}/")
     public String addToFavourite (@PathVariable Long id, @PathVariable Long teamId, @RequestParam String agree, @AuthenticationPrincipal CurrentUser currentUser) {
         if (agree.equals("yes")) {
@@ -108,6 +148,13 @@ TeamController {
         return "redirect:/user/"+id+"/teams/";
     }
 
+    /**
+     * GET for showing all the {@link Favourite} {@link Team} ordered by seeding
+     * @param id is the id of the {@link User}
+     * @param logedUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view with all the favourite teams of the user
+     */
     @GetMapping("/{id}/teams/favourites")
     public String allFavouritesTeams(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser logedUser) {
         User currentUser = userService.findById(logedUser.getUser().getId());
