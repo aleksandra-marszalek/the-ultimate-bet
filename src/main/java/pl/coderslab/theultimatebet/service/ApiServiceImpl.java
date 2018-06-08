@@ -44,7 +44,7 @@ public class ApiServiceImpl implements ApiService {
     private ArrayList<JSONObject> groups = new ArrayList<>();
 
     @Scheduled(fixedRate = 5000)
-    public void regenerateGroups() throws JSONException {
+    public void regenerateGroups() throws org.json.JSONException {
         groups.clear();
         List<Group> allGroups = groupRepository.findAll();
         for (Group g: allGroups) {

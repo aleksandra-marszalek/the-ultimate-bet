@@ -19,6 +19,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller responsible for providing all the data related to {@link Bet} and connecting the services with the views.
+ */
 @Controller
 @RequestMapping("/user")
 public class BetController {
@@ -38,6 +41,13 @@ public class BetController {
         @Autowired
         BetService betService;
 
+    /**
+     * GET for showing all the {@link Bet} by the {@link User}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view with all the bets.
+     */
         @GetMapping("/{id}/bets")
         public String allBets(@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
             if (currentUser.getUser().getId() == id) {
@@ -51,6 +61,13 @@ public class BetController {
         }
 
 
+    /**
+     * GET for showing all the active {@link Bet} by the {@link User}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view with all the active bets.
+     */
         @GetMapping("/{id}/bets/active")
         public String allBetsActive (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
             if (currentUser.getUser().getId() == id) {
@@ -63,7 +80,13 @@ public class BetController {
             }
         }
 
-
+    /**
+     * GET for showing all the finished {@link Bet} by the {@link User}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view with all the finished bets.
+     */
         @GetMapping("/{id}/bets/finished")
         public String allBetsFinished (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
             if (currentUser.getUser().getId() == id) {
@@ -82,7 +105,14 @@ public class BetController {
             }
         }
 
-
+    /**
+     * GET for showing specific {@link Bet} by the {@link User}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @param betId is the id of the specific {@link Bet}
+     * @return the view with the bet.
+     */
         @GetMapping("/{id}/bets/{betId}")
         public String singleBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
             if ((currentUser.getUser().getId() == id) && (betService.findById(betId).getUser().getId()==id)) {
@@ -99,6 +129,14 @@ public class BetController {
             }
         }
 
+    /**
+     * GET for cancelling specific {@link Bet} by the {@link User}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @param betId is the id of the specific {@link Bet}
+     * @return the view with confirmation of cancelling the bet.
+     */
     @GetMapping("/{id}/bets/{betId}/cancel")
     public String cancelBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
         if ((currentUser.getUser().getId() == id) && (betService.findById(betId).getUser().getId()==id)) {
@@ -112,6 +150,15 @@ public class BetController {
         }
     }
 
+    /**
+     * POST for cancelling specific {@link Bet} by the {@link User}
+     * @param id
+     * @param currentUser
+     * @param betId
+     * @param agree
+     * @param model
+     * @return
+     */
     @Transactional
     @PostMapping("/{id}/bets/{betId}/cancel")
     public String cancelBet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser,
