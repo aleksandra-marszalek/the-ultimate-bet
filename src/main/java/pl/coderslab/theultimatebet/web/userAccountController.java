@@ -50,6 +50,14 @@ public class userAccountController {
 //
 //    }
 
+    /**
+     * GET to show the specific {@link User} {@link Wallet}, list of {@link Operation}, as well as links to adding the money to
+     * the wallet or {@link Withdrawal}
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view of the wallet if the user is authenticated and redirects to home if not
+     */
     @GetMapping("/{id}/wallet")
     public String showWallet (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
         if (currentUser.getUser().getId() == id) {
@@ -69,6 +77,13 @@ public class userAccountController {
         }
     }
 
+    /**
+     * GET to withdraw the money from the User {@link Wallet},
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view to the form
+     */
     @GetMapping("/{id}/wallet/withdrawMoney")
     public String withdrawMoney (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
         if (currentUser.getUser().getId() == id) {
@@ -82,6 +97,16 @@ public class userAccountController {
         }
     }
 
+    /**
+     * POST to withdraw the money from the User {@link Wallet}, if it is successful it saves the withdrawal
+     * it also saves an {@link Operation}, and it takes the money from the account.
+     * @param withdrawal keeps the info about the single withdrawal
+     * @param result BindingResult
+     * @param id is the id of the {@link User}
+     * @param logedUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return error pages if there are some errors or redirects to wallet if it is successful
+     */
     @PostMapping("/{id}/wallet/withdrawMoney")
     public String withdrawMoney (@Valid @ModelAttribute Withdrawal withdrawal, BindingResult result,
                                  @PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser logedUser) {
@@ -114,6 +139,13 @@ public class userAccountController {
 
 
 
+    /**
+     * GET to add the money to the User {@link Wallet},
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return the view to agreement
+     */
     @GetMapping("/{id}/wallet/addMoney/{amount}")
     public String addMoney (@PathVariable Long id, @PathVariable Integer amount, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
         if (currentUser.getUser().getId() == id) {
@@ -125,6 +157,14 @@ public class userAccountController {
         }
     }
 
+    /**
+     * POST to add the money to the User {@link Wallet},
+     * @param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param agree to confirm the transaction
+     * @param amount - amount of the choice of the user to add to wallet
+     * @return the view to wallet either the agree is true or false
+     */
     @PostMapping("/{id}/wallet/addMoney/{amount}")
     public String addMoney (@PathVariable Long id, @PathVariable Integer amount, @RequestParam String agree, @AuthenticationPrincipal CurrentUser currentUser) {
         if (agree.equals("yes")) {
