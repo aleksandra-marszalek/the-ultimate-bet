@@ -77,7 +77,8 @@ public class BetServiceImpl implements BetService {
             Wallet wallet = bet.getUser().getWallet();
             if (game.getStatus() == 1) {
                 Team userTeam = bet.getTeam();
-                if (game.getPointsTeam1() > game.getPointsTeam2() && userTeam.equals(game.getTeam1())) {
+                if (game.getPointsTeam1() > game.getPointsTeam2() && userTeam.equals(game.getTeam1()) ||
+                game.getPointsTeam2() > game.getPointsTeam1() && userTeam.equals(game.getTeam2())) {
                     wallet.setBalance(wallet.getBalance().add(bet.getTotalAmount()));
                     bet.setResult("won");
                     Operation operation = new Operation();
