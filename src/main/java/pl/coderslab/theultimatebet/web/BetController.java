@@ -66,7 +66,7 @@ public class BetController {
      * @param id is the id of the {@link User}
      * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
      * @param model used to provide the data to the view.
-     * @return the view with all the active bets.
+     * @return the view with all the active bets or redirects to home if user has no authorities to do it
      */
         @GetMapping("/{id}/bets/active")
         public String allBetsActive (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
@@ -85,7 +85,7 @@ public class BetController {
      * @param id is the id of the {@link User}
      * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
      * @param model used to provide the data to the view.
-     * @return the view with all the finished bets.
+     * @return the view with all the finished bets or redirects to home if user has no authorities to do it
      */
         @GetMapping("/{id}/bets/finished")
         public String allBetsFinished (@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
@@ -111,7 +111,7 @@ public class BetController {
      * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
      * @param model used to provide the data to the view.
      * @param betId is the id of the specific {@link Bet}
-     * @return the view with the bet.
+     * @return the view with the bet or redirects to home if user has no authorities to do it
      */
         @GetMapping("/{id}/bets/{betId}")
         public String singleBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
@@ -135,7 +135,7 @@ public class BetController {
      * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
      * @param model used to provide the data to the view.
      * @param betId is the id of the specific {@link Bet}
-     * @return the view with confirmation of cancelling the bet.
+     * @return the view with confirmation of cancelling the bet or redirects to home if user has no authorities to do it
      */
     @GetMapping("/{id}/bets/{betId}/cancel")
     public String cancelBet (@PathVariable Long id, @PathVariable Long betId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
@@ -152,11 +152,12 @@ public class BetController {
 
     /**
      * POST for cancelling specific {@link Bet} by the {@link User} - needs an agree from the user.
-     *@param id is the id of the {@link User}
+     * @param id is the id of the {@link User}
      * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
      * @param model used to provide the data to the view.
      * @param betId is the id of the specific {@link Bet}
-     * @return
+     * @param agree is the boolean to confirm the cancellation
+     * @return errors if the game is finished or redirects to the wallet
      */
     @Transactional
     @PostMapping("/{id}/bets/{betId}/cancel")
@@ -186,7 +187,14 @@ public class BetController {
         return "redirect:/user/"+id+"/wallet";
     }
 
-
+    /**
+     * GET for add new {@link Bet} by the {@link User}
+     * @param id is the id of the {@link User}
+     * @param gameId is the {@link Game} that is the subject of the Bet
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @return view to add bet or redirects to home if user has no authorities to do it
+     */
         @GetMapping("/{id}/bets/{gameId}/addBet")
         public String addBet (@PathVariable Long id, @PathVariable Long gameId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
             if (currentUser.getUser().getId() == id) {
@@ -211,6 +219,16 @@ public class BetController {
             }
         }
 
+    /**
+     *
+     * @param bet is the {@link Bet} to be placed
+     * @param result {@link BindingResult}
+     * @param id is the id of the {@link User}
+     * @param gameId is the {@link Game} that is the subject of the Bet
+     * @param model used to provide the data to the view in case of errors
+     * @param logedUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @return AddBet view if some errors, error if other errors related to placing bets, and redirects to all bets if everything is fine
+     */
         @Transactional
         @PostMapping("/{id}/bets/{gameId}/addBet")
         public String addBet(@Valid @ModelAttribute Bet bet, BindingResult result,
