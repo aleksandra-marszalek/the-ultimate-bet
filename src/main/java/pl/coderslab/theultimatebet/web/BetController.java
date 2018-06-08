@@ -151,12 +151,11 @@ public class BetController {
     }
 
     /**
-     * POST for cancelling specific {@link Bet} by the {@link User}
-     * @param id
-     * @param currentUser
-     * @param betId
-     * @param agree
-     * @param model
+     * POST for cancelling specific {@link Bet} by the {@link User} - needs an agree from the user.
+     *@param id is the id of the {@link User}
+     * @param currentUser keeping all the info about actual {@link User}, used to authenticate and provide the right authorities.
+     * @param model used to provide the data to the view.
+     * @param betId is the id of the specific {@link Bet}
      * @return
      */
     @Transactional
